@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryProduct {
 
     private String category;
     private String subCategory;
-    private List<Product> products;
+    private List<Product> products = new ArrayList<Product>();
 
     public CategoryProduct(String category, String subCategory) {
         this.category = category;
