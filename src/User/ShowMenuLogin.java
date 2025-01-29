@@ -36,7 +36,8 @@ public class ShowMenuLogin {
             System.out.println("1. Ajouter un utilisateur");
             System.out.println("2. Supprimer un utilisateur");
             System.out.println("3. Lister les utilisateurs");
-            System.out.println("4. Déconnexion");
+            System.out.println("4. Gerer les utilisateurs");
+            System.out.println("5. Déconnexion");
 
             System.out.print("Choisissez une option : ");
             int choix = scanner.nextInt();
@@ -53,6 +54,9 @@ public class ShowMenuLogin {
                     userService.listUsers();
                     break;
                 case 4:
+                    userService.gererUser();
+                    break;
+                case 5:
                     System.out.println("Déconnexion...");
                     return;
                 default:
