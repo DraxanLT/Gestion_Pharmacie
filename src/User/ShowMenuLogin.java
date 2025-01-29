@@ -22,28 +22,9 @@ public class ShowMenuLogin {
         if (user != null) {
             System.out.println("Bienvenue, " + user.getRole() + " !");
             if (user.isAdmin()) {
-                System.out.println(" ");
-                System.out.println("1. Menu Admin");
-                System.out.println("2. Menu Employee");
-                System.out.println(" ");
-                System.out.println("Quelle menu voulez vous ? ( 1-2 )");
-                int nbmenu = scanner.nextInt();
-
-                    switch (nbmenu) {
-                        case 1:
-                            showAdminMenu();
-                            break;
-                        case 2:
-                            // afficher 2 eme menu
-                            break;
-                        default:
-                            System.out.println("Nombre invalide !");
-                    }
-
+                showAdminMenu();
             }
             // ici quand c'est l'employee
-            // afficher menu employee
-
         } else {
             System.out.println("Identifiant ou mot de passe incorrect.");
         }
@@ -58,36 +39,29 @@ public class ShowMenuLogin {
             System.out.println("4. Gerer les utilisateurs");
             System.out.println("5. Déconnexion");
 
-                try {
-                    System.out.print("Choisissez une option : ");
-                    int choix = scanner.nextInt();
+            System.out.print("Choisissez une option : ");
+            int choix = scanner.nextInt();
+            scanner.nextLine();
 
-                    switch (choix) {
-                        case 1:
-                            userService.addUser();
-                            break;
-                        case 2:
-                            userService.removeUser();
-                            break;
-                        case 3:
-                            userService.listUsers();
-                            break;
-                        case 4:
-                            userService.gererUser();
-                            break;
-                        case 5:
-                            System.out.println("Déconnexion...");
-                            return;
-                        default:
-                            System.out.println("Option invalide.");
-                    }
-
-                }catch (Exception e) {
-                    System.out.println("Nombre Invalide ");
-                }
-
-
-
+            switch (choix) {
+                case 1:
+                    userService.addUser();
+                    break;
+                case 2:
+                    userService.removeUser();
+                    break;
+                case 3:
+                    userService.listUsers();
+                    break;
+                case 4:
+                    userService.gererUser();
+                    break;
+                case 5:
+                    System.out.println("Déconnexion...");
+                    return;
+                default:
+                    System.out.println("Option invalide.");
+            }
         }
     }
 }
