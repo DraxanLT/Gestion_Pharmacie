@@ -1,4 +1,4 @@
-import java.util.Scanner;
+package User;
 
 public abstract class User {
     protected String identifiant;
