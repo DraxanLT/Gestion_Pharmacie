@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class ListProduct {
     public static void main(String[] args) {
@@ -56,8 +57,12 @@ public class ListProduct {
 
         SearchProduct.searchProductByName();
 
+//        Product findProduct = SearchProduct.searchProductByName();
+//
+//        Scanner scan = new Scanner(System.in);
+//        int nombre = scan.nextInt();
 
-        pharmacy.LowStock();
+        pharmacy.showlowstock();
 
     }
 }

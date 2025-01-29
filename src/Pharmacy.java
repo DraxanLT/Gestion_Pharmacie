@@ -50,23 +50,26 @@ public class Pharmacy {
         return allProducts;
     }
 
-    public void LowStock() {
+    public List<Product> LowStock() {
         /**
          * This function show the products that need to be restocked
          *
          */
         List<Product> lowStock = new ArrayList<>();
         int stock;
-        for(int i = 0; i<products.size();i++) {
-            CategoryProduct categoryProductucs = products.get(i);
-            for (int j = 0; j<categoryProductucs.getProducts().size();j++) {
-                Product product = categoryProductucs.getProducts().get(j);
-                stock = product.getStockQuantity();
-                if(stock<=5 && stock>=0) {
-                    lowStock.add(product);
-                }
+        List<Product> allProducts = getAllProducts();
+        for (int i = 0; i < allProducts.size(); i++) {
+            Product product = allProducts.get(i);
+            stock = product.getStockQuantity();
+            if (stock <= 5 && stock >= 0) {
+                lowStock.add(product);
             }
         }
+        return lowStock;
+    }
+
+    public void showlowstock() {
+        List<Product> lowStock = LowStock();
         List<Product> lowStocktrie = Sorting.SortQuantity(lowStock,1);
         for(int i = 0; i<lowStocktrie.size();i++) {
             Product product = lowStocktrie.get(i);
