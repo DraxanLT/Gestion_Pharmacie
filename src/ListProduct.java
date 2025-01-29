@@ -52,6 +52,8 @@ public class ListProduct {
         pharmacy.addProduct(medoc1);
         pharmacy.addProduct(medoc2);
 
+        SearchProduct.searchProductByName();
+
 
 
     }
