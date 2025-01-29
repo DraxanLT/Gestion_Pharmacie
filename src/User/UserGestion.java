@@ -1,21 +1,24 @@
 package User;
 
+import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class UserGestion {
-    private List<User> users;
-
+    private List<User> usersList;
+    Scanner scanner = new Scanner(System.in);
     public UserGestion() {
-        this.users = new ArrayList<>();
+        this.usersList = new ArrayList<>();
 
 
-        users.add(new Admin("admin", "1234", "admin"));
-        users.add(new Employe("employee", "0000", "employee"));
+        usersList.add(new Admin("admin", "1234", "admin"));
+        usersList.add(new Employe("employee", "0000", "employee"));
+        usersList.add(new Employe("employee", "0000", "SuperEmployee"));
     }
 
     public User authenticate(String identifiant, String password) {
-        for (User user : users) {
+        for (User user : usersList) {
             if (user.authenticate(identifiant, password)) {
                 return user;
             }
@@ -24,14 +27,65 @@ public class UserGestion {
     }
 
     public void addUser() {
-        // Code pour ajouter un utilisateur
+
+        System.out.println("Inserer un nouvel user");
+        System.out.println("rensignez nom role :");
+        String role = scanner.nextLine();
+        System.out.println("rensignez password :");
+        String pass = scanner.nextLine();
+        System.out.println("rensignez identifiant :");
+        String idf = scanner.nextLine();
+        usersList.add(new Admin(role, pass, idf));
+        System.out.println(" ");
+        System.out.println(" L'utilisateur a bien ete Ajouter :) ");
     }
 
     public void removeUser() {
-        // Code pour supprimer un utilisateur
+//        System.out.println("Voici la Liste des utilisateurs :");
+//        System.out.println(" ");
+//        for (User user : usersList) {
+//            System.out.println(user);
+//        }
+//        System.out.println(" ");
+//        System.out.println("Quel utilisateur souhaiter vous supprimer ? ( 1, 2,3,etc) ");
+//        int userRemoved = scanner.nextInt();
+//        // scanner.nextLine();
+//
+//        if (userRemoved == 1) {
+//            System.out.println(" ");
+//            System.out.println("Vous ne pouvez pas vous supprimer vous meme");
+//        }else if (userRemoved > 1) {
+//            for (int i = 0; i < usersList.size(); i++) {
+//                usersList.remove(usersList.get(i));
+//                System.out.println("L'utilisateur : " + i + " A ete supprimer");
+//            }
+//            System.out.println(" ");
+//        }else {
+//            System.out.println("Donner un chiffre correct !");
+//        }
+    }
+
+    public void gererUser(){
+        System.out.println("Gerer les utilisateur");
+        System.out.println("");
+        System.out.println("Liste des utilisateurs :");
+        System.out.println(" ");
+        for (User user : usersList) {
+            System.out.println(user);
+        }
+        System.out.println("");
+        System.out.println("renseignez l'utilisateur a gerer ! (1,2,3,etc...) ");
+        int userGerer = scanner.nextInt();
+
+
     }
 
     public void listUsers() {
-        // Code pour lister les utilisateurs
+        System.out.println("Liste des utilisateurs :");
+        System.out.println(" ");
+        for (User user : usersList) {
+            System.out.println(user);
+        }
+
     }
 }

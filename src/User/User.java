@@ -26,4 +26,9 @@ public abstract class User {
     public boolean isAdmin() {
         return this instanceof Admin;
     }
+
+    @Override
+    public String toString() {
+        return "Id : " + this.identifiant + ", Rôle: " + this.role;
+    }
 }
