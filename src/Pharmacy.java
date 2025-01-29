@@ -5,7 +5,7 @@ public class Pharmacy {
 
     private String name;
     private String adress;
-    private static List<CategoryProduct> products = new ArrayList<>();
+    private static List<Product> products = new ArrayList<>();
 
     public Pharmacy(String name, String adress) {
         this.name = name;
@@ -28,27 +28,18 @@ public class Pharmacy {
         this.adress = adress;
     }
 
-    public List<CategoryProduct> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<CategoryProduct> products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 
-    public void addProduct(CategoryProduct product) {
+    public void addProduct(Product product) {
         this.products.add(product);
     }
 
-    public static List<Product> getAllProducts() {
-        List<Product> allProducts = new ArrayList<>();
-        if (products != null) {
-            for (CategoryProduct category : products) {
-                allProducts.addAll(category.getProducts());
-            }
-        }
-        return allProducts;
-    }
 
     public List<Product> LowStock() {
         /**
@@ -57,9 +48,8 @@ public class Pharmacy {
          */
         List<Product> lowStock = new ArrayList<>();
         int stock;
-        List<Product> allProducts = getAllProducts();
-        for (int i = 0; i < allProducts.size(); i++) {
-            Product product = allProducts.get(i);
+        for (int i = 0; i < products.size(); i++) {
+            Product product = products.get(i);
             stock = product.getStockQuantity();
             if (stock <= 5 && stock >= 0) {
                 lowStock.add(product);

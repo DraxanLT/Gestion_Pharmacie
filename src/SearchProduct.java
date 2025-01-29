@@ -6,15 +6,14 @@ import java.util.ArrayList;
 public class SearchProduct {
 
 
-    public static Product searchProductByName() {
+    public static Product searchProductByName(Pharmacy pharmacy) {
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Entrez le nom du produit à rechercher : ");
         String productName = scanner.nextLine();
-        scanner.close();
 
         // Récupérer tous les produits
-        List<Product> allProducts = Pharmacy.getAllProducts();
+        List<Product> allProducts = pharmacy.getProducts();
 
         // Trier les produits par nom (ignore la casse)
         allProducts.sort(Comparator.comparing(p -> p.getName().toLowerCase()));
