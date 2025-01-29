@@ -5,7 +5,7 @@ public class Pharmacy {
 
     private String name;
     private String adress;
-    private List<CategoryProduct> products = new ArrayList<CategoryProduct>();
+    private static List<CategoryProduct> products = new ArrayList<>();
 
     public Pharmacy(String name, String adress) {
         this.name = name;
@@ -38,6 +38,16 @@ public class Pharmacy {
 
     public void addProduct(CategoryProduct product) {
         this.products.add(product);
+    }
+
+    public static List<Product> getAllProducts() {
+        List<Product> allProducts = new ArrayList<>();
+        if (products != null) {
+            for (CategoryProduct category : products) {
+                allProducts.addAll(category.getProducts());
+            }
+        }
+        return allProducts;
     }
 
     public void LowStock() {
