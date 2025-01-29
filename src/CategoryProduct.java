@@ -1,15 +1,15 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryProduct {
 
     private String category;
     private String subCategory;
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
-    public CategoryProduct(String category, String subCategory, List<Product> products) {
+    public CategoryProduct(String category, String subCategory) {
         this.category = category;
         this.subCategory = subCategory;
-        this.products = products;
     }
 
     public String getCategory() {
@@ -34,5 +34,9 @@ public class CategoryProduct {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public void addProduct(Product product) {
+        this.products.add(product);
     }
 }

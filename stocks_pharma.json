@@ -58,7 +58,7 @@
         ]
       },
       {
-        "category": "Cosmétiques",
+        "category": "Cosmetics",
         "subCategory": "Soins de la peau",
         "products": [
           {
@@ -85,7 +85,7 @@
         ]
       },
       {
-        "category": "Parapharmacie",
+        "category": "Parapharmacy",
         "subCategory": "Hygiène bucco-dentaire",
         "products": [
           {
@@ -112,7 +112,7 @@
         ]
       },
       {
-        "category": "Compléments alimentaires",
+        "category": "Complementary Foods",
         "subCategory": "Vitamines",
         "products": [
           {

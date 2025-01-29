@@ -1,19 +1,20 @@
-import java.util.List;
+public class Product {
 
-public abstract class Product {
+    private int id;
+    private String name;
+    private double price;
+    private int stockQuantity;
+    private String description;
+    private CategoryProduct category;
 
-    protected int id;
-    protected String name;
-    protected double price;
-    protected int stockQuantity;
-    protected String description;
 
-    public Product(int id, String name, double price, int stockQuantity, String description) {
+    public Product(int id, String name, double price, int stockQuantity, String description, CategoryProduct category) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.stockQuantity = stockQuantity;
         this.description = description;
+        this.category = category;
     }
 
     public int getId() {
@@ -54,5 +55,13 @@ public abstract class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public CategoryProduct getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryProduct category) {
+        this.category = category;
     }
 }
