@@ -22,4 +22,8 @@ public abstract class User {
     public boolean authenticate(String identifiant, String password) {
         return this.identifiant.equals(identifiant) && this.password.equals(password);
     }
+
+    public boolean isAdmin() {
+        return this instanceof Admin;
+    }
 }
