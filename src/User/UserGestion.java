@@ -76,6 +76,24 @@ public class UserGestion {
         System.out.println("");
         System.out.println("renseignez l'utilisateur a gerer ! (1,2,3,etc...) ");
         int userGerer = scanner.nextInt();
+        System.out.println(" ");
+
+        while (true) {
+
+            System.out.println("1. Retirer un role");
+            System.out.println("2. Ajouter un role");
+            System.out.println("3. Quitter");
+
+            System.out.print("Choisissez une option : ");
+            int choix = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choix) {
+                case 1:
+                    usersList.get(1);
+
+            }
+        }
 
 
     }
