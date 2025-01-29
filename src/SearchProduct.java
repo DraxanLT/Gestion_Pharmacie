@@ -6,13 +6,8 @@ import java.util.ArrayList;
 public class SearchProduct {
 
 
-    public static Product searchProductByName(Pharmacy pharmacy) {
+    public static Product searchProductByName(Pharmacy pharmacy, String productName) {
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Entrez le nom du produit à rechercher : ");
-        String productName = scanner.nextLine();
-
-        // Récupérer tous les produits
         List<Product> allProducts = pharmacy.getProducts();
 
         // Trier les produits par nom (ignore la casse)
@@ -27,8 +22,6 @@ public class SearchProduct {
 
             int comparison = productName.compareToIgnoreCase(midProduct.getName());
             if (comparison == 0) {
-                System.out.println("Produit trouvé : " + midProduct.getName() +
-                        ", Quantité : " + midProduct.getStockQuantity());
                 return midProduct;
             }
             if (comparison < 0) {
@@ -38,7 +31,6 @@ public class SearchProduct {
             }
         }
 
-        System.out.println("Le produit '" + productName + "' n'est pas disponible.");
         return null;
     }
 }

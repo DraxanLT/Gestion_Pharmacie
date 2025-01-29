@@ -53,11 +53,11 @@ public class ListProduct {
         pharmacy.addProduct(amo14);
         pharmacy.addProduct(amo15);
 
-//        SearchProduct.searchProductByName();
 
-//
 
-        Product findProduct = SearchProduct.searchProductByName(pharmacy);
+
+
+        Product findProduct = SearchProduct.searchProductByName(pharmacy, "vitamine c");
         Scanner sc = new Scanner(System.in);
         int nombre = 0;
         System.out.print("Entrez lgdgdsfd: ");
