@@ -6,10 +6,9 @@ public class Pharmacy {
     private String adress;
     private List<CategoryProduct> products;
 
-    public Pharmacy(String name, String adress, List<CategoryProduct> products) {
+    public Pharmacy(String name, String adress) {
         this.name = name;
         this.adress = adress;
-        this.products = products;
     }
 
     public String getName() {
@@ -34,5 +33,9 @@ public class Pharmacy {
 
     public void setProducts(List<CategoryProduct> products) {
         this.products = products;
+    }
+
+    public void addProduct(CategoryProduct product) {
+        this.products.add(product);
     }
 }
