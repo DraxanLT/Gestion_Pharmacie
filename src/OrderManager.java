@@ -6,11 +6,14 @@ public class OrderManager {
 
     // Liste statique pour stocker les commandes créées
     private static List<Order> orders = new ArrayList<>();
+    private static CSV csv = new CSV("statsDoc.csv");
+
+
     /**
      * Affiche le menu principal pour gérer les commandes.
      * L'utilisateur peut créer une commande, afficher les commandes existantes ou quitter.
      */
-    public static void orderMenu(CSV csv) {
+    public static void orderMenu() {
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
 
@@ -25,7 +28,7 @@ public class OrderManager {
             scanner.nextLine(); // Consomme le retour de ligne
 
             switch (choice) {
-                case 1 -> createOrder(scanner, csv);
+                case 1 -> createOrder(scanner);
                 case 2 -> displayOrders();
                 case 3 -> {
                     System.out.println("Fermeture du gestionnaire de commandes.");
@@ -41,7 +44,7 @@ public class OrderManager {
      * Crée une nouvelle commande en demandant à l'utilisateur
      * si la commande est urgente ou standard, puis ajoute des produits.
      */
-    private static void createOrder(Scanner scanner, CSV csv) {
+    private static void createOrder(Scanner scanner) {
         System.out.print("La commande est-elle urgente ? (oui/non) : ");
         boolean isUrgent = scanner.nextLine().equalsIgnoreCase("oui");
 
@@ -73,7 +76,15 @@ public class OrderManager {
             if (product.getStockQuantity() >= quantity) {
                 order.addProductToOrder(product, quantity);
                 product.updateOrder(quantity);
-                csv.addNewOrder(product,quantity);
+                csv.readCSVFile();
+//                csv.mostAsk(csv.getStatsDoc(), csv.getJ(), csv);
+                csv.LessAsk(csv.getStatsDoc(), csv.getJ(), csv);
+                csv.afficherStats();
+//                csv.mostBuy(csv.getStatsDoc(), csv.getJ(), csv);
+//                csv.afficherStats();
+//                csv.mostBuy(csv.getStatsDoc(), csv.getJ(), csv);
+//                csv.afficherStats();
+//                csv.addNewOrder(product,quantity);
                 System.out.println("Produit ajouté à la commande.");
             } else {
                 System.out.println("Stock insuffisant. Disponible : " + product.getStockQuantity());

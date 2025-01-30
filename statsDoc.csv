@@ -1,16 +1,16 @@
 Name product,Number of orders,Number of product buy
-Amoxicilline,0,0
-Azithromycine,0,0
-Ciprofloxacine,0,0
-Paracétamol,0,0
-Ibuprofène,0,0
-Tramadol,0,0
-Crème hydratante,0,0
-Gel nettoyant visage,0,0
-Sérum anti-âge,0,0
-Brosse à dents électrique,0,0
-Dentifrice blancheur,0,0
-Bain de bouche antiseptique,0,0
-Vitamine C,0,0
-Vitamine D,0,0
-Oméga-3,0,0
+Dentifrice blancheur,1,1
+Brosse à dents électrique,1,4
+Ibuprofène,2,7
+Vitamine C,2,9
+Oméga-3,3,3
+Gel nettoyant visage,3,19
+Bain de bouche antiseptique,4,5
+Amoxicilline,4,20
+Ciprofloxacine,5,17
+Tramadol,8,39
+Paracétamol,9,18
+Vitamine D,10,59
+Sérum anti-âge,12,71
+Azithromycine,15,76
+Crème hydratante,16,170

@@ -35,21 +35,12 @@ public class ListProduct implements Serializable {
     }
 
     public static void main(String[] args) {
-        CSV csv = new CSV("statsDoc.csv");
-        csv.readCSVFile();
 
         JsonManager jsonManager = new JsonManager();
         Root root = jsonManager.readJson("stocks_pharma.json");
         Pharmacy pharmacy;
 
-        if (root != null) {
-            pharmacy = root.getPharmacy();
-            List<Product> allProducts = pharmacy.getListProducts();
-            allProducts.forEach(product ->
-                    csv.addNewProduct(product));
-        }
-
-        OrderManager.orderMenu(csv);
+        OrderManager.orderMenu();
 
         /*Product findProduct = SearchProduct.searchProductByName(pharmacy, "vitamine c");
         Scanner sc = new Scanner(System.in);
@@ -64,6 +55,7 @@ public class ListProduct implements Serializable {
         pharmacy.showlowstock();*/
 
     }
+
 
 
 }
