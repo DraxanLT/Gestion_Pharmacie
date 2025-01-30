@@ -1,15 +1,18 @@
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Pharmacy {
 
     private String name;
     private String adress;
-    private static List<Product> products = new ArrayList<>();
+    private List<CategoryProduct> products = new ArrayList<>();
+    private static List<Product> ListAllProduct = new ArrayList<>();
+
 
     public Pharmacy(String name, String adress) {
         this.name = name;
         this.adress = adress;
+
     }
 
     public String getName() {
@@ -28,16 +31,24 @@ public class Pharmacy {
         this.adress = adress;
     }
 
-    public List<Product> getProducts() {
+    public List<Product> getListProducts() {
+        return ListAllProduct;
+    }
+
+    public List<CategoryProduct> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(List<CategoryProduct> products) {
         this.products = products;
     }
 
+    public void setListProducts(List<Product> products) {
+        this.ListAllProduct = products;
+    }
+
     public void addProduct(Product product) {
-        this.products.add(product);
+        this.ListAllProduct.add(product);
     }
 
 
@@ -48,8 +59,8 @@ public class Pharmacy {
          */
         List<Product> lowStock = new ArrayList<>();
         int stock;
-        for (int i = 0; i < products.size(); i++) {
-            Product product = products.get(i);
+        for (int i = 0; i < ListAllProduct.size(); i++) {
+            Product product = ListAllProduct.get(i);
             stock = product.getStockQuantity();
             if (stock <= 5 && stock >= 0) {
                 lowStock.add(product);
@@ -71,4 +82,10 @@ public class Pharmacy {
             }
         }
     }
+
+    public void addProduct(CategoryProduct product) {
+        this.products.add(product);
+    }
+
+
 }

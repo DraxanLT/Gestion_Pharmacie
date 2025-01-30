@@ -8,7 +8,6 @@ public class Product {
     protected int stockQuantity;
     protected String description;
     protected CategoryProduct category;
-    protected CategoryProduct subCategory;
 
 
     public Product(int id, String name, double price, int stockQuantity, String description, CategoryProduct category, CategoryProduct subCategory) {
@@ -18,7 +17,6 @@ public class Product {
         this.stockQuantity = stockQuantity;
         this.description = description;
         this.category = category;
-        this.subCategory = subCategory;
     }
 
     public int getId() {
@@ -59,5 +57,19 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void updateOrder(int nombre){
+        stockQuantity -=nombre;
+    }
+
+
+
+    public CategoryProduct getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryProduct category) {
+        this.category = category;
     }
 }
