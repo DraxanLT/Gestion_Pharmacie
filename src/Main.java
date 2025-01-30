@@ -10,6 +10,4 @@ public class Main {
         ShowMenuLogin showMenu = new ShowMenuLogin(userService);
         showMenu.showMenuLogin(); // Lancement du men
     }
-
-
 }

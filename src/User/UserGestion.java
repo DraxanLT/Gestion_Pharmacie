@@ -91,7 +91,9 @@ public class UserGestion {
             switch (choix) {
                 case 1:
                     usersList.get(1);
-
+                case 3:
+                    System.out.println("exit..");
+                    return;
             }
         }
 

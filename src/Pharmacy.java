@@ -5,7 +5,7 @@ public class Pharmacy {
 
     private String name;
     private String adress;
-    private List<CategoryProduct> products = new ArrayList<CategoryProduct>();
+    private static List<Product> products = new ArrayList<>();
 
     public Pharmacy(String name, String adress) {
         this.name = name;
@@ -28,35 +28,38 @@ public class Pharmacy {
         this.adress = adress;
     }
 
-    public List<CategoryProduct> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<CategoryProduct> products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 
-    public void addProduct(CategoryProduct product) {
+    public void addProduct(Product product) {
         this.products.add(product);
     }
 
-    public void LowStock() {
+
+    public List<Product> LowStock() {
         /**
          * This function show the products that need to be restocked
          *
          */
         List<Product> lowStock = new ArrayList<>();
         int stock;
-        for(int i = 0; i<products.size();i++) {
-            CategoryProduct categoryProductucs = products.get(i);
-            for (int j = 0; j<categoryProductucs.getProducts().size();j++) {
-                Product product = categoryProductucs.getProducts().get(j);
-                stock = product.getStockQuantity();
-                if(stock<=5 && stock>=0) {
-                    lowStock.add(product);
-                }
+        for (int i = 0; i < products.size(); i++) {
+            Product product = products.get(i);
+            stock = product.getStockQuantity();
+            if (stock <= 5 && stock >= 0) {
+                lowStock.add(product);
             }
         }
+        return lowStock;
+    }
+
+    public void showlowstock() {
+        List<Product> lowStock = LowStock();
         List<Product> lowStocktrie = Sorting.SortQuantity(lowStock,1);
         for(int i = 0; i<lowStocktrie.size();i++) {
             Product product = lowStocktrie.get(i);
