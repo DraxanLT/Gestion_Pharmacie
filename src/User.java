@@ -10,10 +10,20 @@ public abstract class User {
     }
 
     public String getRole() {
+        /**
+         * This function give the user's role
+         *
+         * @return the user's role
+         */
         return this.role;
     }
 
     public String getIdentifiant() {
+        /**
+         * This function give the user's identifier
+         *
+         * @return the user's identifier
+         */
         return this.identifiant;
     }
 

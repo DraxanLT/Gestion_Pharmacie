@@ -30,10 +30,14 @@ public class CSV {
     }
 
     public void readCSVFile() {
+        /**
+         * This function add the data in the csv file to the csv object
+         */
         statsDoc.clear();
         File file = new File(filename);
 
         if (!file.exists()) {
+            // If the file doesn't exist, it creates a new file
             try {
                 ArrayList<String> temp = new ArrayList<String>();
                 temp.add("Name product");
@@ -46,6 +50,7 @@ public class CSV {
                 e.printStackTrace();
             }
         } else {
+            // If the file exist, it adds information to list statsDoc
             try (Scanner scanner = new Scanner(new File(filename))) {
                 while (scanner.hasNextLine()) {
                     statsDoc.add(getRecordFromLine(scanner.nextLine()));
@@ -57,6 +62,13 @@ public class CSV {
     }
 
     private List<String> getRecordFromLine(String line) {
+        /**
+         * This function overwrites the data in the csv file with new data.
+         *
+         * @param line : the line of the csv file
+         *
+         * @return the list of values
+         */
         List<String> values = new ArrayList<String>();
         try (Scanner rowScanner = new Scanner(line)) {
             rowScanner.useDelimiter(",");
