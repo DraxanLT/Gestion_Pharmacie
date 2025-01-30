@@ -7,7 +7,7 @@ import java.io.IOException;
  */
 public class JsonManager {
 
-    private  Gson gson;
+    private Gson gson;
 
     public JsonManager() {
         this.gson = new Gson();
@@ -16,21 +16,22 @@ public class JsonManager {
     public Root readJson(String filePath) {
         try (FileReader fileReader = new FileReader(filePath)) {
             Root root = gson.fromJson(fileReader, Root.class);
-            System.out.println(root.getPharmacy());
-            System.out.println(root.getPharmacy().getProducts());
-            for (CategoryProduct categoryProduct : root.getPharmacy().getProducts()) {
 
-                System.out.println(categoryProduct);
-                for (Product product : categoryProduct.getProducts()) {
-                    root.getPharmacy().addProduct(product);
-                    product.setCategory(categoryProduct);
+            if (filePath.equals("stocks_pharma.json")) {
+                for (CategoryProduct categoryProduct : root.getPharmacy().getProducts()) {
+
+                    for (Product product : categoryProduct.getProducts()) {
+                        root.getPharmacy().addProduct(product);
+                        product.setCategory(categoryProduct);
+                    }
                 }
+                return root;
             }
-            return root;
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
+        return null;
     }
 }
+

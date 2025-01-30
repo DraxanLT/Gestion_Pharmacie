@@ -1,8 +1,4 @@
-import java.util.ArrayList;
 import java.util.List;
-
-import java.util.Random;
-import java.util.Scanner;
 
 public class ListProduct {
 
@@ -33,25 +29,4 @@ public class ListProduct {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-
-        Pharmacy pharmacy = printAllProducts();
-        OrderManager.orderMenu();
-
-        /*Product findProduct = SearchProduct.searchProductByName(pharmacy, "vitamine c");
-        Scanner sc = new Scanner(System.in);
-        int nombre = 0;
-        System.out.print("Entrez lgdgdsfd: ");
-        nombre = sc.nextInt();
-
-
-
-        System.out.println("il faut : "+ nombre+ " "+  findProduct.getName());
-
-        pharmacy.showlowstock();*/
-
-    }
-
-
 }
