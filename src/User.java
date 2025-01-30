@@ -1,5 +1,3 @@
-package User;
-
 public abstract class User {
     protected String identifiant;
     protected String password;
