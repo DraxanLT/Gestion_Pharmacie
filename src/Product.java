@@ -60,4 +60,10 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void updateOrder(int nombre){
+        stockQuantity -=nombre;
+    }
+
+
 }
