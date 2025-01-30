@@ -16,9 +16,13 @@ public class JsonManager {
     public Root readJson(String filePath) {
         try (FileReader fileReader = new FileReader(filePath)) {
             Root root = gson.fromJson(fileReader, Root.class);
-
+            System.out.println(root.getPharmacy());
+            System.out.println(root.getPharmacy().getProducts());
             for (CategoryProduct categoryProduct : root.getPharmacy().getProducts()) {
+
+                System.out.println(categoryProduct);
                 for (Product product : categoryProduct.getProducts()) {
+                    root.getPharmacy().addProduct(product);
                     product.setCategory(categoryProduct);
                 }
             }

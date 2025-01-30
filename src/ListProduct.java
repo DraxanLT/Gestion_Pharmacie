@@ -6,13 +6,7 @@ import java.util.Scanner;
 
 public class ListProduct {
 
-    public static List<Product> listAllProducts(Pharmacy pharmacy) {
-        List<Product> allProducts = new ArrayList<>();
-        pharmacy.getProducts().forEach(categoryProduct -> allProducts.addAll(categoryProduct.getProducts()));
-        return allProducts;
-    }
-
-    public static void printAllProducts() {
+    public static Pharmacy printAllProducts() {
         JsonManager jsonManager = new JsonManager();
 
         Root root = jsonManager.readJson("stocks_pharma.json");
@@ -20,7 +14,7 @@ public class ListProduct {
         if (root != null) {
             Pharmacy pharmacy = root.getPharmacy();
 
-            List<Product> allProducts = listAllProducts(pharmacy);
+            List<Product> allProducts = pharmacy.getListProducts();
 
             Sorting.sortAlphabetically(allProducts);
 
@@ -32,12 +26,17 @@ public class ListProduct {
                         + " eur | Quantity : " + product.getStockQuantity()
                         + " | " + "Category : " + product.getCategory().getCategory());
             });
+            System.out.println();
+            return pharmacy;
         } else {
             System.out.println("Error");
         }
+        return null;
     }
+
     public static void main(String[] args) {
-        Pharmacy pharmacy = new Pharmacy("PharmaPlus", "123 Rue de la Santé, Paris");
+        Pharmacy pharmacy = printAllProducts();
+
         Product findProduct = SearchProduct.searchProductByName(pharmacy);
         Scanner sc = new Scanner(System.in);
         int nombre = 0;

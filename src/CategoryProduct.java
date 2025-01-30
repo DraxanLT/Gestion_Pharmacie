@@ -7,6 +7,7 @@ public class CategoryProduct {
     private String subCategory;
     private List<Product> products = new ArrayList<>();
 
+
     public CategoryProduct(String category, String subCategory) {
         this.category = category;
         this.subCategory = subCategory;

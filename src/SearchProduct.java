@@ -13,7 +13,7 @@ public class SearchProduct {
         String productName = scanner.nextLine();
 
         // Récupérer tous les produits
-        List<Product> allProducts = pharmacy.getProducts();
+        List<Product> allProducts = pharmacy.getListProducts();
 
         // Trier les produits par nom (ignore la casse)
         allProducts.sort(Comparator.comparing(p -> p.getName().toLowerCase()));
