@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class Product {
 
     protected int id;
@@ -10,7 +8,7 @@ public class Product {
     protected CategoryProduct category;
 
 
-    public Product(int id, String name, double price, int stockQuantity, String description, CategoryProduct category, CategoryProduct subCategory) {
+    public Product(int id, String name, double price, int stockQuantity, String description, CategoryProduct category) {
         this.id = id;
         this.name = name;
         this.price = price;

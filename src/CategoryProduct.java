@@ -8,7 +8,7 @@ public class CategoryProduct {
     private List<Product> products = new ArrayList<>();
 
 
-    public CategoryProduct(String category, String subCategory) {
+    public CategoryProduct(String category) {
         this.category = category;
         this.subCategory = subCategory;
     }

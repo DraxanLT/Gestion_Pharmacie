@@ -1,69 +1,54 @@
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderJson {
 
-    private static void saveOrdersToJsonFile() {
-        JSONArray ordersArray = new JSONArray();
 
-        for (Order order : OrderManager.orders) {
-            JSONObject orderObject = new JSONObject();
-            orderObject.put("date", order.getFormattedDate());
-            orderObject.put("type", order instanceof UrgentOrder ? "Urgente" : "Standard");
+    public static void loadOrdersFromJsonFile() {
+        try (FileReader reader = new FileReader("C:/Users/kiwia/Desktop/Coding/projet pharmacie/Gestion_Pharmacie/orders.json")) {
+            JSONParser jsonParser = new JSONParser();
+            JSONArray ordersArray = (JSONArray) jsonParser.parse(reader);
 
-            JSONArray itemsArray = new JSONArray();
-            for (Order.OrderItem item : order.orderItems) {
-                JSONObject itemObject = new JSONObject();
-                itemObject.put("productName", item.getProduct().getName());
-                itemObject.put("quantity", item.getQuantity());
-                itemObject.put("price", item.getProduct().getPrice());
-                itemsArray.add(itemObject);
-            }
+            for (Object orderObj : ordersArray) {
+                JSONObject orderJson = (JSONObject) orderObj;
 
-            orderObject.put("items", itemsArray);
-            ordersArray.add(orderObject);
-        }
+                String date = (String) orderJson.get("date");
+                String type = (String) orderJson.get("type");
 
-        try (FileWriter file = new FileWriter("orders.json")) {
-            file.write(ordersArray.toJSONString());
-            file.flush();
-            System.out.println("Commandes enregistrées avec succès !");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+                Order order = type.equals("Urgente") ? new UrgentOrder() : new StandardOrder();
 
-    static void loadOrdersFromJsonFile() {
-        JSONParser parser = new JSONParser();
+                JSONArray itemsArray = (JSONArray) orderJson.get("items");
 
-        try (FileReader reader = new FileReader("orders.json")) {
-            JSONArray ordersArray = (JSONArray) parser.parse(reader);
-
-            for (Object obj : ordersArray) {
-                JSONObject orderObject = (JSONObject) obj;
-                String type = (String) orderObject.get("type");
-                Order order = "Urgente".equals(type) ? new UrgentOrder() : new StandardOrder();
-
-                JSONArray itemsArray = (JSONArray) orderObject.get("items");
                 for (Object itemObj : itemsArray) {
-                    JSONObject itemObject = (JSONObject) itemObj;
-                    String productName = (String) itemObject.get("productName");
-                    int quantity = ((Long) itemObject.get("quantity")).intValue();
-                    double price = ((Double) itemObject.get("price"));
+                    JSONObject itemJson = (JSONObject) itemObj;
 
-                    Product product = new Product(Order.OrderItem); // Remplacer selon votre constructeur
-                    order.addProductToOrder(product, quantity);
+                    String productName = (String) itemJson.get("productName");
+                    Long quantity = (Long) itemJson.get("quantity"); // JSON retourne des Long
+                    Double price = (Double) itemJson.get("price");
+
+                    Product product = SearchProduct.searchProductByName(productName);
+                    if (product != null) {
+                        order.addProductToOrder(product, quantity.intValue());
+                    }
                 }
 
                 OrderManager.orders.add(order);
             }
-            System.out.println("Commandes chargées avec succès !");
-        } catch (Exception e) {
+            System.out.println("Commandes chargées depuis orders.json");
+        } catch (FileNotFoundException e) {
+            System.out.println("Fichier orders.json introuvable. Aucun chargement effectué.");
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
     }
+
 }

@@ -1,3 +1,8 @@
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,11 +12,14 @@ public class OrderManager {
     // Liste statique pour stocker les commandes créées
     public static List<Order> orders = new ArrayList<>();
 
+
     /**
      * Affiche le menu principal pour gérer les commandes.
      * L'utilisateur peut créer une commande, afficher les commandes existantes ou quitter.
      */
     public static void orderMenu() {
+        Runtime.getRuntime().addShutdownHook(new Thread(OrderManager::saveOrdersToJsonFile));
+
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
         OrderJson.loadOrdersFromJsonFile();
@@ -36,8 +44,37 @@ public class OrderManager {
                 default -> System.out.println("Choix invalide.");
             }
         }
-        Runtime.getRuntime().addShutdownHook(new Thread(OrderManager::saveOrdersToJsonFile));
         scanner.close();
+    }
+
+    public static void saveOrdersToJsonFile() {
+        JSONArray ordersArray = new JSONArray();
+
+        for (Order order : OrderManager.orders) {
+            JSONObject orderObject = new JSONObject();
+            orderObject.put("date", order.getFormattedDate());
+            orderObject.put("type", order instanceof UrgentOrder ? "Urgente" : "Standard");
+
+            JSONArray itemsArray = new JSONArray();
+            for (Order.OrderItem item : order.orderItems) {
+                JSONObject itemObject = new JSONObject();
+                itemObject.put("productName", item.getProduct().getName());
+                itemObject.put("quantity", item.getQuantity());
+                itemObject.put("price", item.getProduct().getPrice());
+                itemsArray.add(itemObject);
+            }
+
+            orderObject.put("items", itemsArray);
+            ordersArray.add(orderObject);
+        }
+
+        try (FileWriter file = new FileWriter("orders.json")) {
+            file.write(ordersArray.toJSONString());
+            file.flush();
+            System.out.println("Commandes enregistrées avec succès !");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
