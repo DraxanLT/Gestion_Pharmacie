@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class OrderManager {
 
     // Liste statique pour stocker les commandes créées
-    private static List<Order> orders = new ArrayList<>();
+    public static List<Order> orders = new ArrayList<>();
 
     /**
      * Affiche le menu principal pour gérer les commandes.
@@ -14,6 +14,7 @@ public class OrderManager {
     public static void orderMenu() {
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
+        OrderJson.loadOrdersFromJsonFile();
 
         while (!exit) {
             System.out.println("\n--- Gestion des Commandes ---");
@@ -35,6 +36,7 @@ public class OrderManager {
                 default -> System.out.println("Choix invalide.");
             }
         }
+        Runtime.getRuntime().addShutdownHook(new Thread(OrderManager::saveOrdersToJsonFile));
         scanner.close();
     }
 
@@ -70,7 +72,8 @@ public class OrderManager {
 
             /**
              * Vérifie si le produit existe dans la liste et si la quantité est disponible.
-             * Si oui, l'ajoute à la commande et met à jour le stock.*/
+             * Si oui, l'ajoute à la commande et met à jour le stock.
+             */
             if (product.getStockQuantity() >= quantity) {
                 order.addProductToOrder(product, quantity);
                 product.updateOrder(quantity);
@@ -95,6 +98,7 @@ public class OrderManager {
             for (int i = 0; i < orders.size(); i++) {
                 Order order = orders.get(i);
                 System.out.println("Commande #" + (i + 1) + (order instanceof UrgentOrder ? " (Urgente)" : " (Standard)"));
+                System.out.println("Date de commande : " + order.getFormattedDate());
                 for (Order.OrderItem item : order.orderItems) {
                     System.out.println("- Produit : " + item.getProduct().getName() + ", Quantité : " + item.getQuantity());
                 }

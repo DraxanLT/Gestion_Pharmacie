@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -6,7 +9,23 @@ import java.util.List;
  */
 public abstract class Order {
 
-    protected List<OrderItem> orderItems;  // Liste des produits commandés avec leur quantité
+    protected List<OrderItem> orderItems; // Liste des produits commandés avec leur quantité
+    protected LocalDateTime orderDateTime;
+
+    public Order() {
+        this.orderItems = new ArrayList<>();
+        this.orderDateTime = LocalDateTime.now(); // Initialise avec la date et l'heure actuelle
+    }
+
+    public LocalDateTime getOrderDateTime() {
+        return orderDateTime;
+    }
+
+    // Format personnalisé pour afficher la date
+    public String getFormattedDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        return orderDateTime.format(formatter);
+    }
 
     // Méthode pour valider la commande
     public abstract boolean validateOrder();

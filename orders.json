@@ -1,0 +1,55 @@
+[
+  {
+    "orderItems": [
+      {
+        "product": {
+          "name": "Paracétamol",
+          "stockQuantity": 100
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "name": "Ibuprofène",
+          "stockQuantity": 50
+        },
+        "quantity": 1
+      }
+    ],
+    "orderDate": "2025-01-30T10:30:00",
+    "urgent": false
+  },
+  {
+    "orderItems": [
+      {
+        "product": {
+          "name": "Bandage stérile",
+          "stockQuantity": 200
+        },
+        "quantity": 5
+      }
+    ],
+    "orderDate": "2025-01-30T11:45:00",
+    "urgent": true
+  },
+  {
+    "orderItems": [
+      {
+        "product": {
+          "name": "Thermomètre digital",
+          "stockQuantity": 30
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "name": "Gélules de vitamine C",
+          "stockQuantity": 75
+        },
+        "quantity": 3
+      }
+    ],
+    "orderDate": "2025-01-30T12:15:00",
+    "urgent": false
+  }
+]

@@ -1,15 +1,11 @@
-import java.util.ArrayList;
 import java.util.List;
-
-import java.util.Random;
-import java.util.Scanner;
 
 public class ListProduct {
 
     public static Pharmacy printAllProducts() {
         JsonManager jsonManager = new JsonManager();
 
-        Root root = jsonManager.readJson("stocks_pharma.json");
+        Root root = jsonManager.readJson("C:/Users/kiwia/Desktop/Coding/projet pharmacie/Gestion_Pharmacie/stocks_pharma.json");
 
         if (root != null) {
             Pharmacy pharmacy = root.getPharmacy();
