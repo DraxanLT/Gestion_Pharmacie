@@ -51,7 +51,7 @@ public class ShowMenuLogin {
                                 break;
                             case 2:
                                 System.out.println("\nAccès au Menu Employé...\n");
-                                 // show Employee menu
+                                ListProduct.printAllProducts();
                                 break;
                             case 3:
                                 System.out.println("Déconnexion...");
@@ -62,7 +62,7 @@ public class ShowMenuLogin {
                     }
                 } else {
                     System.out.println("\nAccès au Menu Employé...\n");
-                     // Appelle la fonction du menu employé
+                    ListProduct.printAllProducts();
                 }
             } else {
                 System.out.println("Identifiant ou mot de passe incorrect.\n");
