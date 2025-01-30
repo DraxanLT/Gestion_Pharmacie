@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class ListProduct {
+public class ListProduct implements Serializable {
 
     public static Pharmacy printAllProducts() {
         JsonManager jsonManager = new JsonManager();

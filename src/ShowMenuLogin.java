@@ -66,6 +66,7 @@ public class ShowMenuLogin {
                 }
             } else {
                 System.out.println("Identifiant ou mot de passe incorrect.\n");
+                return;
             }
         }
     }

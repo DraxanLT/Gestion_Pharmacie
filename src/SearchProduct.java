@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class SearchProduct {
+public class SearchProduct  implements Serializable {
 
     /**
      * Recherche un produit par son nom dans la liste triée des produits.

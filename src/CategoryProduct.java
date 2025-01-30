@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryProduct {
+public class CategoryProduct implements Serializable {
 
     private String category;
     private String subCategory;
