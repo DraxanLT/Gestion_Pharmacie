@@ -6,12 +6,11 @@ public class OrderManager {
 
     // Liste statique pour stocker les commandes créées
     private static List<Order> orders = new ArrayList<>();
-
     /**
      * Affiche le menu principal pour gérer les commandes.
      * L'utilisateur peut créer une commande, afficher les commandes existantes ou quitter.
      */
-    public static void orderMenu() {
+    public static void orderMenu(CSV csv) {
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
 
@@ -26,7 +25,7 @@ public class OrderManager {
             scanner.nextLine(); // Consomme le retour de ligne
 
             switch (choice) {
-                case 1 -> createOrder(scanner);
+                case 1 -> createOrder(scanner, csv);
                 case 2 -> displayOrders();
                 case 3 -> {
                     System.out.println("Fermeture du gestionnaire de commandes.");
@@ -42,7 +41,7 @@ public class OrderManager {
      * Crée une nouvelle commande en demandant à l'utilisateur
      * si la commande est urgente ou standard, puis ajoute des produits.
      */
-    private static void createOrder(Scanner scanner) {
+    private static void createOrder(Scanner scanner, CSV csv) {
         System.out.print("La commande est-elle urgente ? (oui/non) : ");
         boolean isUrgent = scanner.nextLine().equalsIgnoreCase("oui");
 
@@ -74,6 +73,7 @@ public class OrderManager {
             if (product.getStockQuantity() >= quantity) {
                 order.addProductToOrder(product, quantity);
                 product.updateOrder(quantity);
+                csv.addNewOrder(product,quantity);
                 System.out.println("Produit ajouté à la commande.");
             } else {
                 System.out.println("Stock insuffisant. Disponible : " + product.getStockQuantity());
