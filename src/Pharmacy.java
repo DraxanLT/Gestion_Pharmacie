@@ -1,15 +1,17 @@
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Pharmacy {
 
     private String name;
     private String adress;
     private static List<Product> products = new ArrayList<>();
+    private List<CategoryProduct> products0 = new ArrayList<>();
 
     public Pharmacy(String name, String adress) {
         this.name = name;
         this.adress = adress;
+        this.products = products;
     }
 
     public String getName() {
@@ -71,4 +73,10 @@ public class Pharmacy {
             }
         }
     }
+
+    public void addProduct(CategoryProduct product) {
+        this.products0.add(product);
+    }
+
+
 }
