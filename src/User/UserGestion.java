@@ -27,17 +27,28 @@ public class UserGestion {
     }
 
     public void addUser() {
+        System.out.println("Insérer un nouvel utilisateur");
+        String pass;
+        String idf;
+        String role;
 
-        System.out.println("Inserer un nouvel user");
-        System.out.println("rensignez nom role :");
-        String role = scanner.nextLine();
-        System.out.println("rensignez password :");
-        String pass = scanner.nextLine();
-        System.out.println("rensignez identifiant :");
-        String idf = scanner.nextLine();
+        do {
+            System.out.println("Renseignez le rôle (ex: Admin, User) :");
+            role = scanner.nextLine().trim();
+        } while (role.isEmpty() || !role.matches("[a-zA-Z]+"));
+
+        do {
+            System.out.println("Renseignez un mot de passe :");
+            pass = scanner.nextLine().trim();
+        } while (pass.isEmpty());
+
+        do {
+            System.out.println("Renseignez un identifiant (lettres uniquement) :");
+            idf = scanner.nextLine().trim();
+        } while (idf.isEmpty() || !idf.matches("[a-zA-Z]+"));
+
         usersList.add(new Admin(role, pass, idf));
-        System.out.println(" ");
-        System.out.println(" L'utilisateur a bien ete Ajouter :) ");
+        System.out.println("\nL'utilisateur a bien été ajouté :)");
     }
 
     public void removeUser() {
@@ -65,37 +76,72 @@ public class UserGestion {
 //        }
     }
 
-    public void gererUser(){
-        System.out.println("Gerer les utilisateur");
-        System.out.println("");
-        System.out.println("Liste des utilisateurs :");
-        System.out.println(" ");
-        for (User user : usersList) {
-            System.out.println(user);
+    public void gererUser() {
+        System.out.println("Gérer les utilisateurs\n");
+
+        if (usersList.isEmpty()) {
+            System.out.println("Aucun utilisateur dans la liste !");
+            return;
         }
-        System.out.println("");
-        System.out.println("renseignez l'utilisateur a gerer ! (1,2,3,etc...) ");
-        int userGerer = scanner.nextInt();
-        System.out.println(" ");
 
+        System.out.println("Liste des utilisateurs :\n");
+
+        for (int i = 0; i < usersList.size(); i++) {
+            System.out.println((i + 1) + ". " + usersList.get(i).getIdentifiant() + " (" + usersList.get(i).getRole() + ")");
+        }
+
+        System.out.println("\nRenseignez le numéro de l'utilisateur à gérer (1-" + usersList.size() + ") :");
+
+        int userIndex = -1;
         while (true) {
-
-            System.out.println("1. Retirer un role");
-            System.out.println("2. Ajouter un role");
-            System.out.println("3. Quitter");
-
-            System.out.print("Choisissez une option : ");
-            int choix = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (choix) {
-                case 1:
-                    usersList.get(1);
-
+            try {
+                userIndex = scanner.nextInt() - 1;
+                scanner.nextLine();
+                if (userIndex >= 0 && userIndex < usersList.size()) break;
+                System.out.println("Numéro invalide veuillez réessayer :");
+            } catch (Exception e) {
+                System.out.println("Entrée invalide ! Veuillez entrer un nombre.");
+                scanner.nextLine();
             }
         }
 
+        User selectedUser = usersList.get(userIndex);
+        System.out.println("Utilisateur sélectionné : " + selectedUser.getIdentifiant() + " (" + selectedUser.getRole() + ")\n");
 
+        while (true) {
+            System.out.println("1. Retirer un rôle");
+            System.out.println("2. Ajouter un rôle");
+            System.out.println("3. Quitter");
+
+            System.out.print("Choisissez une option : ");
+            int choix;
+            try {
+                choix = scanner.nextInt();
+                scanner.nextLine();
+            } catch (Exception e) {
+                System.out.println("Entrée invalide ! Veuillez entrer un nombre.");
+                scanner.nextLine();
+                continue;
+            }
+
+            switch (choix) {
+                case 1:
+                    selectedUser.setRole(""); // Suppression du rôle
+                    System.out.println("Rôle retiré avec succès !");
+                    break;
+                case 2:
+                    System.out.print("Entrez le nouveau rôle : ");
+                    String newRole = scanner.nextLine();
+                    selectedUser.setRole(newRole);
+                    System.out.println("Rôle ajouté avec succès !");
+                    break;
+                case 3:
+                    System.out.println("Retour au menu principal...");
+                    return;
+                default:
+                    System.out.println("Option invalide, veuillez réessayer.");
+            }
+        }
     }
 
     public void listUsers() {
@@ -104,6 +150,6 @@ public class UserGestion {
         for (User user : usersList) {
             System.out.println(user);
         }
-
+        System.out.println(" ");
     }
 }

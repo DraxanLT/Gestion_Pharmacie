@@ -31,4 +31,16 @@ public abstract class User {
     public String toString() {
         return "Id : " + this.identifiant + ", Rôle: " + this.role;
     }
+
+    public void setRole(String newRole) {
+        if (newRole.isEmpty()) {
+            System.out.println("Le rôle ne peut pas être vide !");
+        } else if (!newRole.matches("[a-zA-Z]+")) {
+            System.out.println("Le rôle doit contenir uniquement des lettres !");
+        } else {
+            this.role = newRole;
+            System.out.println("Nouveau rôle attribué : " + newRole);
+        }
+    }
+
 }
