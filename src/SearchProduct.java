@@ -1,14 +1,17 @@
 import java.util.Comparator;
 import java.util.List;
-import java.util.Scanner;
-import java.util.ArrayList;
 
 public class SearchProduct {
 
+    /**
+     * Recherche un produit par son nom dans la liste triée des produits.
+     * Utilise une recherche binaire pour une meilleure performance.
+     * @param productName Nom du produit à rechercher.
+     * @return Produit correspondant, ou null si introuvable.
+     */
+    public static Product searchProductByName(String productName) {
 
-    public static Product searchProductByName(Pharmacy pharmacy, String productName) {
-
-        List<Product> allProducts = pharmacy.getProducts();
+        List<Product> allProducts = Pharmacy.getProducts();
 
         // Trier les produits par nom (ignore la casse)
         allProducts.sort(Comparator.comparing(p -> p.getName().toLowerCase()));

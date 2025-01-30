@@ -5,6 +5,9 @@ public class StandardOrder extends Order {
         this.orderItems = new ArrayList<>();
     }
 
+    /**
+     * Commande standard avec une vérification de stock stricte (marge de 5 unités).
+     */
     @Override
     public boolean validateOrder() {
         for (OrderItem item : orderItems) {

@@ -54,10 +54,11 @@ public class ListProduct {
         pharmacy.addProduct(amo15);
 
 
+        OrderManager.orderMenu();
 
 
 
-        Product findProduct = SearchProduct.searchProductByName(pharmacy, "vitamine c");
+        /*Product findProduct = SearchProduct.searchProductByName(pharmacy, "vitamine c");
         Scanner sc = new Scanner(System.in);
         int nombre = 0;
         System.out.print("Entrez lgdgdsfd: ");
@@ -67,7 +68,7 @@ public class ListProduct {
 
         System.out.println("il faut : "+ nombre+ " "+  findProduct.getName());
 
-        pharmacy.showlowstock();
+        pharmacy.showlowstock();*/
 
     }
 }

@@ -28,7 +28,9 @@ public class Pharmacy {
         this.adress = adress;
     }
 
-    public List<Product> getProducts() {
+
+    //ajout de static
+    public static List<Product> getProducts() {
         return products;
     }
 
