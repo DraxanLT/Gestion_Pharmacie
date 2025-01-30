@@ -72,4 +72,15 @@ public class Product {
     public void setCategory(CategoryProduct category) {
         this.category = category;
     }
+
+    public boolean isStockSufficient(int requestedQuantity) {
+        /**
+         * Vérifie si le stock est suffisant pour un produit donné
+         *
+         * @param product Le produit à vérifier
+         * @param requestedQuantity La quantité demandée
+         * @return true si le stock est suffisant, false sinon
+         */
+        return getStockQuantity() >= requestedQuantity;
+    }
 }

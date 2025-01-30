@@ -1,5 +1,5 @@
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Pharmacy {
 
@@ -12,7 +12,6 @@ public class Pharmacy {
     public Pharmacy(String name, String adress) {
         this.name = name;
         this.adress = adress;
-
     }
 
     public String getName() {
@@ -31,7 +30,7 @@ public class Pharmacy {
         this.adress = adress;
     }
 
-    public List<Product> getListProducts() {
+    public static List<Product> getListProducts() {
         return ListAllProduct;
     }
 

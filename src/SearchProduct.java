@@ -5,15 +5,15 @@ import java.util.ArrayList;
 
 public class SearchProduct {
 
+    /**
+     * Recherche un produit par son nom dans la liste triée des produits.
+     * Utilise une recherche binaire pour une meilleure performance.
+     * @param productName Nom du produit à rechercher.
+     * @return Produit correspondant, ou null si introuvable.
+     */
+    public static Product searchProductByName(String productName) {
 
-    public static Product searchProductByName(Pharmacy pharmacy) {
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Entrez le nom du produit à rechercher : ");
-        String productName = scanner.nextLine();
-
-        // Récupérer tous les produits
-        List<Product> allProducts = pharmacy.getListProducts();
+        List<Product> allProducts = Pharmacy.getListProducts();
 
         // Trier les produits par nom (ignore la casse)
         allProducts.sort(Comparator.comparing(p -> p.getName().toLowerCase()));
@@ -27,8 +27,6 @@ public class SearchProduct {
 
             int comparison = productName.compareToIgnoreCase(midProduct.getName());
             if (comparison == 0) {
-                System.out.println("Produit trouvé : " + midProduct.getName() +
-                        ", Quantité : " + midProduct.getStockQuantity());
                 return midProduct;
             }
             if (comparison < 0) {
@@ -38,7 +36,6 @@ public class SearchProduct {
             }
         }
 
-        System.out.println("Le produit '" + productName + "' n'est pas disponible.");
         return null;
     }
 }

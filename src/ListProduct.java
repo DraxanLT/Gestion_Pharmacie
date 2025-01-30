@@ -35,16 +35,21 @@ public class ListProduct {
     }
 
     public static void main(String[] args) {
-        Pharmacy pharmacy = printAllProducts();
 
-        Product findProduct = SearchProduct.searchProductByName(pharmacy);
+        Pharmacy pharmacy = printAllProducts();
+        OrderManager.orderMenu();
+
+        /*Product findProduct = SearchProduct.searchProductByName(pharmacy, "vitamine c");
         Scanner sc = new Scanner(System.in);
         int nombre = 0;
         System.out.print("Entrez lgdgdsfd: ");
         nombre = sc.nextInt();
 
 
-        pharmacy.showlowstock();
+
+        System.out.println("il faut : "+ nombre+ " "+  findProduct.getName());
+
+        pharmacy.showlowstock();*/
 
     }
 
