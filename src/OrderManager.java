@@ -77,14 +77,7 @@ public class OrderManager {
                 order.addProductToOrder(product, quantity);
                 product.updateOrder(quantity);
                 csv.readCSVFile();
-//                csv.mostAsk(csv.getStatsDoc(), csv.getJ(), csv);
-                csv.LessAsk(csv.getStatsDoc(), csv.getJ(), csv);
-                csv.afficherStats();
-//                csv.mostBuy(csv.getStatsDoc(), csv.getJ(), csv);
-//                csv.afficherStats();
-//                csv.mostBuy(csv.getStatsDoc(), csv.getJ(), csv);
-//                csv.afficherStats();
-//                csv.addNewOrder(product,quantity);
+                csv.addNewOrder(product, quantity);
                 System.out.println("Produit ajouté à la commande.");
             } else {
                 System.out.println("Stock insuffisant. Disponible : " + product.getStockQuantity());
