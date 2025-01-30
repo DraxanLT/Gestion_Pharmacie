@@ -61,5 +61,9 @@ public class Product {
         this.description = description;
     }
 
+    public void updateOrder(int nombre){
+        stockQuantity -=nombre;
+    }
+
 
 }
