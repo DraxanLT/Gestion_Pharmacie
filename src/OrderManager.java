@@ -73,7 +73,7 @@ public class OrderManager {
              * Si oui, l'ajoute à la commande et met à jour le stock.*/
             if (product.getStockQuantity() >= quantity) {
                 order.addProductToOrder(product, quantity);
-                product.setStockQuantity(product.getStockQuantity() - quantity);
+                product.updateOrder(quantity);
                 System.out.println("Produit ajouté à la commande.");
             } else {
                 System.out.println("Stock insuffisant. Disponible : " + product.getStockQuantity());

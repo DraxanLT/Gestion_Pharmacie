@@ -12,6 +12,7 @@ public class StandardOrder extends Order {
     public boolean validateOrder() {
         for (OrderItem item : orderItems) {
             if (!item.getProduct().isStockSufficient(item.getQuantity() + 5)) {
+
                 return false;  // La commande est invalide si un produit est en rupture de stock
             }
         }

@@ -54,22 +54,4 @@ public class ListProduct {
     }
 
 
-    public void urgentOrder(Product product, int quantity) {
-        if(product.getStockQuantity() < quantity) {
-            System.out.println("Le produit est en rupture de stock");
-        }
-        else{
-            product.updateOrder(quantity);
-        }
-
-    }
-
-    public void standardOrder(Product product, int quantity) {
-        if(product.getStockQuantity()-5 < quantity) {
-            System.out.println("Le produit n'est plus disponible");
-        }
-        else{
-            product.updateOrder(quantity);
-        }
-    }
 }

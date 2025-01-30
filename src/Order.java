@@ -37,5 +37,6 @@ public abstract class Order {
         public int getQuantity() {
             return quantity;
         }
+
     }
 }
