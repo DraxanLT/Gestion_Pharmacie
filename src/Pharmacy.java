@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class Pharmacy {
+public class Pharmacy implements Serializable {
 
     private String name;
     private String adress;
