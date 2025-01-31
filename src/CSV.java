@@ -19,13 +19,6 @@ public class CSV {
         this.statsDoc = statsDoc;
     }
 
-    public int getJ() {
-        return j;
-    }
-
-    private void setJ(int j) {
-        this.j = j;
-    }
 
     public void readCSVFile() {
         /**
@@ -59,14 +52,14 @@ public class CSV {
         }
     }
 
+    /**
+     * This function put the data of the csv file into a list.
+     *
+     * @param line : the line of the csv file
+     *
+     * @return the list of values
+     */
     private List<String> getRecordFromLine(String line) {
-        /**
-         * This function overwrites the data in the csv file with new data.
-         *
-         * @param line : the line of the csv file
-         *
-         * @return the list of values
-         */
         List<String> values = new ArrayList<String>();
         try (Scanner rowScanner = new Scanner(line)) {
             rowScanner.useDelimiter(",");
@@ -77,6 +70,9 @@ public class CSV {
         return values;
     }
 
+    /**
+     * This function overwrites the data in the csv file with new data.
+     */
     private void writeCSVFile() {
 
         try(PrintWriter writer = new PrintWriter(new FileOutputStream(filename, false))) {
@@ -89,30 +85,12 @@ public class CSV {
         }
     }
 
-
-
-    public void addNewProduct(Product product) {
-        int number = 0;
-        ArrayList<String> temp = new ArrayList<String>();
-        temp.add(product.getName());
-        temp.add(String.valueOf(number));
-        temp.add(String.valueOf(number));
-        statsDoc.add(temp);
-        writeCSVFile();
-    }
-
-    public void removeProduct(Product searchProduct) {
-        String updateProduct = searchProduct.getName();
-        String productName;
-        for (List<String> row : statsDoc) {
-            productName = row.get(0);
-            if(productName.equals(updateProduct)) {
-                statsDoc.remove(row);
-            }
-        }
-    }
-
-
+    /**
+     * This function increases the order history
+     *
+     * @param searchProduct : the product that need to be increase
+     * @param quantity : the quantity order
+     */
     public void addNewOrder(Product searchProduct, int quantity) {
         String updateProduct = searchProduct.getName();
         String productName;
@@ -132,7 +110,10 @@ public class CSV {
         writeCSVFile();
     }
 
-    public void afficherStats() {
+    /**
+     * This function show the Pharmacy's statistic of all the product they sell
+     */
+    public void showStats() {
         for (List<String> row : statsDoc) {
             for (String s : row) {
                 System.out.print(s);
@@ -142,12 +123,15 @@ public class CSV {
         }
     }
 
+    /**
+     * This function shows a menu to make an order
+     */
     public void menuStats() {
         System.out.println("-------------------- Employee Menu ---------------------");
         System.out.println(" 1. Show the most buyed products");
         System.out.println(" 2. Show the less buyed products");
         System.out.println(" 3. Show the most ordered products");
-        System.out.println(" 4. Show the less orderedproducts");
+        System.out.println(" 4. Show the less ordered products");
         System.out.println(" 5. Return to main menu");
         System.out.println(" 6. Shutdown");
         System.out.println("--------------------------------------------------------");
@@ -162,23 +146,21 @@ public class CSV {
             switch (choix) {
                 case 1:
                     mostBuy(this.getStatsDoc(), this.j, this);
-                    afficherStats();
+                    showStats();
                     break;
                 case 2:
                     LessBuy(this.getStatsDoc(), this.j, this);
-                    afficherStats();
+                    showStats();
                     break;
                 case 3:
                     mostAsk(this.getStatsDoc(), this.j, this);
-                    afficherStats();
+                    showStats();
                     break;
                 case 4:
                     LessAsk(this.getStatsDoc(), this.j, this);
-                    afficherStats();
+                    showStats();
                     break;
                 case 5:
-                    UserGestion userService = new UserGestion();
-                    MenuManager menu = new MenuManager(userService);
                     return;
                 case 6:
                     System.out.println("Program Closure...");
@@ -195,7 +177,14 @@ public class CSV {
         }
     }
 
-    public void mostAsk(List<List<String>> liste, int j, CSV csv) {
+    /**
+     * This function order the list by the product the most order
+     *
+     * @param liste : list of product
+     * @param j : the index
+     * @param csv : the file that need to be order
+     */
+    private void mostAsk(List<List<String>> liste, int j, CSV csv) {
         if(liste.size() > j) {
             if(j > 1) {
                 int i = j-1;
@@ -238,7 +227,14 @@ public class CSV {
 
     }
 
-    public void LessAsk(List<List<String>> liste, int j, CSV csv) {
+    /**
+     * This function order the list by the product the less order
+     *
+     * @param liste : list of product
+     * @param j : the index
+     * @param csv : the file that need to be order
+     */
+    private void LessAsk(List<List<String>> liste, int j, CSV csv) {
         if(liste.size() > j) {
             if(j > 1) {
                 int i = j-1;
@@ -281,7 +277,14 @@ public class CSV {
 
     }
 
-    public void mostBuy(List<List<String>> liste, int j, CSV csv) {
+    /**
+     * This function order the list by the product the most buy
+     *
+     * @param liste : list of product
+     * @param j : the index
+     * @param csv : the file that need to be order
+     */
+    private void mostBuy(List<List<String>> liste, int j, CSV csv) {
         if(liste.size() > j) {
             if(j > 1) {
                 int i = j-1;
@@ -324,7 +327,14 @@ public class CSV {
 
     }
 
-    public void LessBuy(List<List<String>> liste, int j, CSV csv) {
+    /**
+     * This function order the list by the product the less buy
+     *
+     * @param liste : list of product
+     * @param j : the index
+     * @param csv : the file that need to be order
+     */
+    private void LessBuy(List<List<String>> liste, int j, CSV csv) {
         if(liste.size() > j) {
             if(j > 1) {
                 int i = j-1;

@@ -2,6 +2,14 @@ import java.util.List;
 
 public class Sorting {
 
+    /**
+     * This function order the product's list by the stock quantity's product
+     *
+     * @param products : list of product
+     * @param j : the index
+     *
+     * @return a sorted list
+     */
     public static List<Product> SortQuantity(List<Product> products, int j) {
         if(products.size() > j) {
             if(j > 0) {
