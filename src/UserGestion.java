@@ -3,17 +3,22 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserGestion {
+
+    // Liste Contenant les Utilisateur en objet
     private List<User> usersList;
     Scanner scanner = new Scanner(System.in);
     public UserGestion() {
         this.usersList = new ArrayList<>();
 
-
+    // List des Utilisateurs  Admin Employee
         usersList.add(new Admin("admin", "1234", "admin"));
         usersList.add(new Employe("employee", "0000", "employee"));
         usersList.add(new Employe("employee", "0000", "SuperEmployee"));
+        usersList.add(new Employe("Client", "0000", "Client"));
     }
 
+
+    // Function D'autentification vefification
     public User authenticate(String identifiant, String password) {
         for (User user : usersList) {
             if (user.authenticate(identifiant, password)) {
@@ -23,27 +28,34 @@ public class UserGestion {
         return null;
     }
 
+
+
+    // Methode addUser Permet au Admin de prouvoir Ajouter des Utilisateur au programme
     public void addUser() {
         System.out.println("Insérer un nouvel utilisateur");
         String pass;
         String idf;
         String role;
 
+        // boucle qui va verifier si ce qui est demander est bon
+        // donner le nom sans espace tant que c'est pas bon il redemande
         do {
             System.out.println("Renseignez le rôle (ex: Admin, User) :");
             role = scanner.nextLine().trim();
         } while (role.isEmpty() || !role.matches("[a-zA-Z]+"));
 
+        // boucle pour le mdp
         do {
             System.out.println("Renseignez un mot de passe :");
             pass = scanner.nextLine().trim();
         } while (pass.isEmpty());
-
+        // boucle pour l'identifiant
         do {
             System.out.println("Renseignez un identifiant (lettres uniquement) :");
             idf = scanner.nextLine().trim();
         } while (idf.isEmpty() || !idf.matches("[a-zA-Z]+"));
 
+        // ajout des renseignement dans la liste users
         usersList.add(new Admin(role, pass, idf));
         System.out.println("\nL'utilisateur a bien été ajouté :)");
     }
@@ -73,9 +85,12 @@ public class UserGestion {
 //        }
     }
 
+
+    // methode qui va venir gerer les Role des Utilisateurs grace au profil d'admin
     public void gererUser() {
         System.out.println("Gérer les utilisateurs\n");
 
+        //Verification si la liste est vide ou pas
         if (usersList.isEmpty()) {
             System.out.println("Aucun utilisateur dans la liste !");
             return;
@@ -83,12 +98,15 @@ public class UserGestion {
 
         System.out.println("Liste des utilisateurs :\n");
 
+        // boucle qui va print chaque User de la liste pour afficher la liste complete
         for (int i = 0; i < usersList.size(); i++) {
             System.out.println((i + 1) + ". " + usersList.get(i).getIdentifiant() + " (" + usersList.get(i).getRole() + ")");
         }
 
         System.out.println("\nRenseignez le numéro de l'utilisateur à gérer (1-" + usersList.size() + ") :");
 
+
+        // boucle qui va venir verifier l'entrer de l'utilisateur et le save dans la variable userIndex
         int userIndex = -1;
         while (true) {
             try {
@@ -102,9 +120,12 @@ public class UserGestion {
             }
         }
 
+        // avec userIndex on va le selectionner dans la liste
         User selectedUser = usersList.get(userIndex);
         System.out.println("Utilisateur sélectionné : " + selectedUser.getIdentifiant() + " (" + selectedUser.getRole() + ")\n");
 
+
+        //boucle qui va demander qu'es ce que l'admin veux faire avec cette user
         while (true) {
             System.out.println("1. Retirer un rôle");
             System.out.println("2. Ajouter un rôle");
@@ -121,6 +142,8 @@ public class UserGestion {
                 continue;
             }
 
+            // switch pour en case 1 : suppprimer le role
+            // case 2 : pour ajouter le role avec .setRole
             switch (choix) {
                 case 1:
                     selectedUser.setRole(""); // Suppression du rôle
@@ -141,6 +164,8 @@ public class UserGestion {
         }
     }
 
+
+    // Affichier la liste des Utilisateur dans le programme
     public void listUsers() {
         System.out.println("Liste des utilisateurs :");
         System.out.println(" ");
