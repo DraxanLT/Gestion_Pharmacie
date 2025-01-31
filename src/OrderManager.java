@@ -1,3 +1,8 @@
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,14 +13,19 @@ public class OrderManager {
     private static List<Order> orders = new ArrayList<>();
     private static CSV csv = new CSV("statsDoc.csv");
 
+    public static List<Order> orders = new ArrayList<>();
+
 
     /**
      * Affiche le menu principal pour gérer les commandes.
      * L'utilisateur peut créer une commande, afficher les commandes existantes ou quitter.
      */
     public static void orderMenu() {
+        Runtime.getRuntime().addShutdownHook(new Thread(OrderManager::saveOrdersToJsonFile));
+
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
+        OrderJson.loadOrdersFromJsonFile();
 
         while (!exit) {
             System.out.println("\n--- Gestion des Commandes ---");
@@ -38,6 +48,36 @@ public class OrderManager {
             }
         }
         scanner.close();
+    }
+
+    public static void saveOrdersToJsonFile() {
+        JSONArray ordersArray = new JSONArray();
+
+        for (Order order : OrderManager.orders) {
+            JSONObject orderObject = new JSONObject();
+            orderObject.put("date", order.getFormattedDate());
+            orderObject.put("type", order instanceof UrgentOrder ? "Urgente" : "Standard");
+
+            JSONArray itemsArray = new JSONArray();
+            for (Order.OrderItem item : order.orderItems) {
+                JSONObject itemObject = new JSONObject();
+                itemObject.put("productName", item.getProduct().getName());
+                itemObject.put("quantity", item.getQuantity());
+                itemObject.put("price", item.getProduct().getPrice());
+                itemsArray.add(itemObject);
+            }
+
+            orderObject.put("items", itemsArray);
+            ordersArray.add(orderObject);
+        }
+
+        try (FileWriter file = new FileWriter("orders.json")) {
+            file.write(ordersArray.toJSONString());
+            file.flush();
+            System.out.println("Commandes enregistrées avec succès !");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -72,7 +112,8 @@ public class OrderManager {
 
             /**
              * Vérifie si le produit existe dans la liste et si la quantité est disponible.
-             * Si oui, l'ajoute à la commande et met à jour le stock.*/
+             * Si oui, l'ajoute à la commande et met à jour le stock.
+             */
             if (product.getStockQuantity() >= quantity) {
                 order.addProductToOrder(product, quantity);
                 product.updateOrder(quantity);
@@ -99,6 +140,7 @@ public class OrderManager {
             for (int i = 0; i < orders.size(); i++) {
                 Order order = orders.get(i);
                 System.out.println("Commande #" + (i + 1) + (order instanceof UrgentOrder ? " (Urgente)" : " (Standard)"));
+                System.out.println("Date de commande : " + order.getFormattedDate());
                 for (Order.OrderItem item : order.orderItems) {
                     System.out.println("- Produit : " + item.getProduct().getName() + ", Quantité : " + item.getQuantity());
                 }
