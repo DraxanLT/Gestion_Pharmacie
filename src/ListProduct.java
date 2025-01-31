@@ -1,8 +1,11 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListProduct {
 
+    /**
+     * This method shows all products that are inside a Json file (using readJson method) & sort them alphabetically.
+     * @return
+     */
     public static Pharmacy printAllProducts() {
         JsonManager jsonManager = new JsonManager();
         Root root = jsonManager.readJson("stocks_pharma.json");

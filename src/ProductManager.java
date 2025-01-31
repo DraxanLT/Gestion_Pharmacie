@@ -10,6 +10,15 @@ public class ProductManager implements Storable {
         this.root = root;
     }
 
+    /**
+     * This function adds a new product to the product list and links it with an existing category or creates a new one
+     *
+     * @param name : name of the product
+     * @param category category of the product
+     * @param price : price of the product
+     * @param quantity : quantity of the product
+     * @param description : description of the product
+     */
     @Override
     public void addProduct(String name, String category, double price, int quantity, String description) {
         if (price <= 0 || quantity < 0) {
@@ -32,17 +41,29 @@ public class ProductManager implements Storable {
         root.getPharmacy().addProduct(newProduct);
     }
 
+    /** This function saves product inventory to a JSON file.
+     * Sauvegarde l'inventaire des produits dans un fichier JSON.
+     *
+     * @param filePath : the path of the json file
+     */
     @Override
     public void saveToJson(String filePath) {
+
         try (FileWriter writer = new FileWriter(filePath)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(root, writer);
             System.out.println("Inventory updated and saved in the .json file.");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * This function adds a new product by asking the user for information, then saves the changes to the json file
+     *
+     * @param filePath : the path of the json file
+     */
     public void addNewProduct(String filePath) {
         Scanner scanner = new Scanner(System.in);
 
@@ -94,6 +115,11 @@ public class ProductManager implements Storable {
         }
     }
 
+    /**
+     * This function loads data from a JSON file and allows the user to add a product
+     *
+     * @param filePath : the path of the json file
+     */
     public static void NewProduct(String filePath) {
         JsonManager jsonManager = new JsonManager();
         Root root = jsonManager.readJson(filePath);
@@ -106,10 +132,17 @@ public class ProductManager implements Storable {
         }
     }
 
+    /**
+     * This function removes a product from inventory based on its name or ID
+     *
+     * @param filePath : the path of the json file
+     */
     public void deleteProductNameId(String filePath) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Do you want to delete by (1) Name or (2) ID? ");
+        System.out.println("Do you want to delete by Name or Id ? ");
+        System.out.print(" 1. By Name ");
+        System.out.print(" 1. By Id ");
         int choice = scanner.nextInt();
         scanner.nextLine();
 
@@ -124,7 +157,7 @@ public class ProductManager implements Storable {
                     .orElse(null);
 
         } else if (choice == 2) {
-            System.out.print("Enter the product ID: ");
+            System.out.print("Enter the product Id: ");
             int productId = scanner.nextInt();
             productToRemove = root.getPharmacy().getListProducts().stream()
                     .filter(p -> p.getId() == productId)
@@ -165,7 +198,12 @@ public class ProductManager implements Storable {
         System.out.println("Product '" + productToRemove.getName() + "' has been deleted.");
     }
 
-    public static void DeleteProduct(String filePath) {
+    /**
+     * This function laods datas from the json file and allows the user to delete a product
+     *
+     * @param filePath : the path of the json file
+     */
+    public static void deleteProduct(String filePath) {
         JsonManager jsonManager = new JsonManager();
         Root root = jsonManager.readJson(filePath);
 

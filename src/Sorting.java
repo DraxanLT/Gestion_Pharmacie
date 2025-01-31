@@ -26,6 +26,11 @@ public class Sorting {
         }
     }
 
+    /**
+     * This function sorts the products alphabetically (insertion sort)
+     *
+     * @param products : a list of all the products
+     */
     static void sortAlphabetically(List<Product> products) {
 
         for (int i = 1; i < products.size(); i++) {

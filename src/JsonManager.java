@@ -15,6 +15,11 @@ public class JsonManager {
                 .create();
     }
 
+    /**
+     * This method reads a JSON file and converts it to a Root object
+     * @param filePath : the path of the json file
+     * @return
+     */
     public Root readJson(String filePath) {
         try (FileReader fileReader = new FileReader(filePath)) {
             Root root = gson.fromJson(fileReader, Root.class);
