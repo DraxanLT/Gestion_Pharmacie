@@ -84,8 +84,6 @@ public class MenuManager {
         }
     }
 
-
-
     private void showAdminMenu() {
         while (true) {
             System.out.println("\n---------------------- Admin Menu ----------------------");
@@ -138,6 +136,9 @@ public class MenuManager {
         }
     }
 
+    /**
+     * This function shows a menu made for employees with a bunch of options for different interactions
+     */
     private void showEmployeeMenu() {
         while (true) {
 
@@ -181,7 +182,7 @@ public class MenuManager {
                         ProductManager.NewProduct("stocks_pharma.json");
                         break;
                     case 4:
-                        ProductManager.DeleteProduct("stocks_pharma.json");
+                        ProductManager.deleteProduct("stocks_pharma.json");
                         break;
                     case 5:
                         Pharmacy pharmacy = ListProduct.createNewPharmacy();
