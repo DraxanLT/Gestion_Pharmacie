@@ -3,35 +3,33 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- * This class serves as a reader, writer of .json files in order to get the datas that the admin needs.
+ * This class serves as a reader of the stocks_pharma.json file in order to get the data that the user needs.
  */
 public class JsonManager {
 
     private Gson gson;
 
     public JsonManager() {
-        this.gson = new Gson();
+        this.gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
     }
 
     public Root readJson(String filePath) {
         try (FileReader fileReader = new FileReader(filePath)) {
             Root root = gson.fromJson(fileReader, Root.class);
 
-            if (filePath.equals("stocks_pharma.json")) {
-                for (CategoryProduct categoryProduct : root.getPharmacy().getProducts()) {
-
-                    for (Product product : categoryProduct.getProducts()) {
-                        root.getPharmacy().addProduct(product);
-                        product.setCategory(categoryProduct);
-                    }
+            root.getPharmacy().getListProducts().clear();
+            for (CategoryProduct categoryProduct : root.getPharmacy().getProducts()) {
+                for (Product product : categoryProduct.getProducts()) {
+                    root.getPharmacy().addProduct(product);
                 }
-                return root;
             }
+            return root;
+
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
-        return null;
     }
 }
-

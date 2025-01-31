@@ -6,9 +6,8 @@ import java.util.List;
  */
 public abstract class Order {
 
-    protected List<OrderItem> orderItems;  // Liste des produits commandés avec leur quantité
+    protected List<OrderItem> orderItems;
 
-    // Méthode pour valider la commande
     public abstract boolean validateOrder();
 
     /**
@@ -20,7 +19,6 @@ public abstract class Order {
         orderItems.add(new OrderItem(product, quantity));
     }
 
-    // Classe interne représentant un article de commande
     public static class OrderItem {
         private Product product;
         private int quantity;

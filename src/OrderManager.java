@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class OrderManager {
 
-    // Liste statique pour stocker les commandes créées
     private static List<Order> orders = new ArrayList<>();
 
     /**
@@ -23,7 +22,7 @@ public class OrderManager {
             System.out.print("Choix : ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consomme le retour de ligne
+            scanner.nextLine();
 
             switch (choice) {
                 case 1 -> createOrder(scanner);
@@ -73,7 +72,7 @@ public class OrderManager {
              * Si oui, l'ajoute à la commande et met à jour le stock.*/
             if (product.getStockQuantity() >= quantity) {
                 order.addProductToOrder(product, quantity);
-                product.updateOrder(quantity);
+                product.setStockQuantity(product.getStockQuantity() - quantity);
                 System.out.println("Produit ajouté à la commande.");
             } else {
                 System.out.println("Stock insuffisant. Disponible : " + product.getStockQuantity());

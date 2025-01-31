@@ -145,13 +145,14 @@ public class MenuManager {
 
             System.out.println("-------------------- Employee Menu ---------------------");
             System.out.println(" 1. List products");
-            System.out.println(" 2. Add a product");
-            System.out.println(" 3. Delete a product");
-            System.out.println(" 4. Manage storage");
-            System.out.println(" 5. Order products");
-            System.out.println(" 6. List orders");
-            System.out.println(" 7. Logout");
-            System.out.println(" 8. Shutdown");
+            System.out.println(" 2. Search a product");
+            System.out.println(" 3. Add a product");
+            System.out.println(" 4. Delete a product");
+            System.out.println(" 5. Manage storage");
+            System.out.println(" 6. Order products");
+            System.out.println(" 7. List orders");
+            System.out.println(" 8. Logout");
+            System.out.println(" 9. Shutdown");
             System.out.println("--------------------------------------------------------");
 
             System.out.println("Choose an option : (1, 2, 3, 4, 5, 6, 7, 8)");
@@ -166,25 +167,28 @@ public class MenuManager {
                         ListProduct.printAllProducts();
                         break;
                     case 2:
-                        // Add product
+                        // Search
                         break;
                     case 3:
-                        // Delete product
+                        ProductManager.NewProduct("stocks_pharma.json");
                         break;
                     case 4:
-                        // Stock
+                        // Delete product
                         break;
                     case 5:
-                        OrderManager.orderMenu();
+                        // Stock
                         break;
                     case 6:
-                        // Historique commandes
+                        OrderManager.orderMenu();
                         break;
                     case 7:
+                        // Orders history
+                        break;
+                    case 8:
                         System.out.println("Disconnecting...");
                         System.out.println("--------------------------------------------------------");
                         return;
-                    case 8:
+                    case 9:
                         System.out.println("Program Closure...");
                         System.out.println("--------------------------------------------------------");
                         System.exit(0);

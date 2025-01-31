@@ -81,10 +81,4 @@ public class Pharmacy {
             }
         }
     }
-
-    public void addProduct(CategoryProduct product) {
-        this.products.add(product);
-    }
-
-
 }

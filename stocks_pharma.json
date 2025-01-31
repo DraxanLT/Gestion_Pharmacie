@@ -58,7 +58,7 @@
         ]
       },
       {
-        "category": "Cosmetics",
+        "category": "Cosmétiques",
         "subCategory": "Soins de la peau",
         "products": [
           {
@@ -85,7 +85,7 @@
         ]
       },
       {
-        "category": "Parapharmacy",
+        "category": "Parapharmacie",
         "subCategory": "Hygiène bucco-dentaire",
         "products": [
           {
@@ -112,7 +112,7 @@
         ]
       },
       {
-        "category": "Complementary Foods",
+        "category": "Compléments alimentaires",
         "subCategory": "Vitamines",
         "products": [
           {
@@ -135,6 +135,20 @@
             "price": 19.99,
             "stockQuantity": 60,
             "description": "Améliore la santé cardiovasculaire."
+          }
+        ]
+      },
+      {
+        "category": "zefzefezf",
+        "subCategory": "",
+        "products": [
+          {
+            "id": 16,
+            "name": "zefzf",
+            "price": 4.99,
+            "stockQuantity": 455,
+            "description": "zefzef",
+            "categoryName": "zefzefezf"
           }
         ]
       }
