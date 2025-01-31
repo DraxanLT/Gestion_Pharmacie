@@ -137,20 +137,6 @@
             "description": "Améliore la santé cardiovasculaire."
           }
         ]
-      },
-      {
-        "category": "zefzefezf",
-        "subCategory": "",
-        "products": [
-          {
-            "id": 16,
-            "name": "zefzf",
-            "price": 4.99,
-            "stockQuantity": 455,
-            "description": "zefzef",
-            "categoryName": "zefzefezf"
-          }
-        ]
       }
     ]
   }

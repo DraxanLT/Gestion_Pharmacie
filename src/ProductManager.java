@@ -105,4 +105,75 @@ public class ProductManager implements Storable {
             System.out.println("Error");
         }
     }
+
+    public void deleteProductNameId(String filePath) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Do you want to delete by (1) Name or (2) ID? ");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        Product productToRemove;
+
+        if (choice == 1) {
+            System.out.print("Enter the product name: ");
+            String productName = scanner.nextLine();
+            productToRemove = root.getPharmacy().getListProducts().stream()
+                    .filter(p -> p.getName().equalsIgnoreCase(productName))
+                    .findFirst()
+                    .orElse(null);
+
+        } else if (choice == 2) {
+            System.out.print("Enter the product ID: ");
+            int productId = scanner.nextInt();
+            productToRemove = root.getPharmacy().getListProducts().stream()
+                    .filter(p -> p.getId() == productId)
+                    .findFirst()
+                    .orElse(null);
+
+        } else {
+            productToRemove = null;
+            System.out.println("Invalid choice.");
+            System.out.println("--------------------------------------------------------");
+            return;
+        }
+
+        if (productToRemove == null) {
+            System.out.println("Product not found.");
+            System.out.println("--------------------------------------------------------");
+            return;
+        }
+
+        System.out.println(" Are you sure you want to delete ''" + productToRemove.getName() + "'' : ");
+        System.out.println(" 1. Yes");
+        System.out.println(" 2. No");
+        System.out.println("--------------------------------------------------------");
+        String confirm = scanner.next().toLowerCase();
+        if (!confirm.equals("1")) {
+            System.out.println("Deletion cancelled.");
+            return;
+        }
+
+        root.getPharmacy().getListProducts().remove(productToRemove);
+
+        for (CategoryProduct category : root.getPharmacy().getProducts()) {
+            category.getProducts().removeIf(p -> p.getId() == productToRemove.getId());
+        }
+
+        saveToJson(filePath);
+
+        System.out.println("Product '" + productToRemove.getName() + "' has been deleted.");
+    }
+
+    public static void DeleteProduct(String filePath) {
+        JsonManager jsonManager = new JsonManager();
+        Root root = jsonManager.readJson(filePath);
+
+        if (root != null) {
+            ProductManager manager = new ProductManager(root);
+            manager.deleteProductNameId(filePath);
+        } else {
+            System.out.println("Error");
+        }
+    }
 }

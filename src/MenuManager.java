@@ -155,7 +155,7 @@ public class MenuManager {
             System.out.println(" 9. Shutdown");
             System.out.println("--------------------------------------------------------");
 
-            System.out.println("Choose an option : (1, 2, 3, 4, 5, 6, 7, 8)");
+            System.out.println("Choose an option : (1, 2, 3, 4, 5, 6, 7, 8, 9)");
             System.out.println("--------------------------------------------------------");
 
             try {
@@ -173,7 +173,7 @@ public class MenuManager {
                         ProductManager.NewProduct("stocks_pharma.json");
                         break;
                     case 4:
-                        // Delete product
+                        ProductManager.DeleteProduct("stocks_pharma.json");
                         break;
                     case 5:
                         // Stock
@@ -193,11 +193,11 @@ public class MenuManager {
                         System.out.println("--------------------------------------------------------");
                         System.exit(0);
                     default:
-                        System.out.println("Invalid option. Please enter a number between 1 and 8.");
+                        System.out.println("Invalid option. Please enter a number between 1 and 9.");
                         System.out.println("--------------------------------------------------------");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a number between 1 and 8.");
+                System.out.println("Invalid input. Please enter a number between 1 and 9.");
                 System.out.println("--------------------------------------------------------");
                 scanner.nextLine();
             }
