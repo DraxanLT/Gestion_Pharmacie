@@ -14,7 +14,7 @@ public class OrderJson {
 
 
     public static void loadOrdersFromJsonFile() {
-        try (FileReader reader = new FileReader("C:/Users/eband/Documents/Pharmacie/Gestion_Pharmacie/orders.json")) {
+        try (FileReader reader = new FileReader("C:/Users/dlaun/Desktop/Gestion_Pharmacie/orders.json")) {
             JSONParser jsonParser = new JSONParser();
             JSONArray ordersArray = (JSONArray) jsonParser.parse(reader);
 

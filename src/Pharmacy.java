@@ -35,26 +35,6 @@ public class Pharmacy{
     }
 
     /**
-     * This function give the adress of the Pharmacy
-     *
-     * @return the adress of the Pharmacy
-     */
-    public String getAdress() {
-
-        return adress;
-    }
-
-    /**
-     * This function put a new adress for the pharmacy
-     *
-     * @param adress : the new adress for the pharmacy
-     */
-    public void setAdress(String adress) {
-
-        this.adress = adress;
-    }
-
-    /**
      * This function give the list of all the product of the Pharmacy
      *
      * @return the list of all the product of the Pharmacy
@@ -82,16 +62,6 @@ public class Pharmacy{
     public void setProducts(List<CategoryProduct> products) {
 
         this.products = products;
-    }
-
-    /**
-     * This function put a new list of products for the pharmacy
-     *
-     * @param products : the new list of products
-     */
-    public void setListProducts(List<Product> products) {
-
-        this.ListAllProduct = products;
     }
 
     /**
@@ -149,16 +119,4 @@ public class Pharmacy{
             }
         }
     }
-
-    /**
-     * This function add a category of product in the list of all the category product
-     *
-     * @param product : the new gategory to add
-     */
-    public void addProduct(CategoryProduct product) {
-
-        this.products.add(product);
-    }
-
-
 }

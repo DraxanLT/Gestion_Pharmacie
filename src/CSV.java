@@ -101,10 +101,8 @@ public class CSV {
             if(productName.equals(updateProduct)) {
                 order = Integer.parseInt(row.get(1)) + 1;
                 newQuantity = Integer.parseInt(row.get(2)) + quantity;
-                row.remove(1);
-                row.remove(2);
-                row.add(String.valueOf(order));
-                row.add(String.valueOf(newQuantity));
+                row.set(1, String.valueOf(order));
+                row.set(2, String.valueOf(newQuantity));
             }
         }
         writeCSVFile();

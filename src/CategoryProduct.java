@@ -25,36 +25,6 @@ public class CategoryProduct implements Serializable {
     }
 
     /**
-     * This function put a new category's name
-     *
-     * @param category : the new category's name
-     */
-    public void setCategory(String category) {
-
-        this.category = category;
-    }
-
-    /**
-     * This function give the sub category's name
-     *
-     * @return the sub category's name
-     */
-    public String getSubCategory() {
-
-        return subCategory;
-    }
-
-    /**
-     * This function put a new sub category's name
-     *
-     * @param subCategory : the new sub category's name
-     */
-    public void setSubCategory(String subCategory) {
-
-        this.subCategory = subCategory;
-    }
-
-    /**
      * This function give the list of product with this category
      *
      * @return the list of product with this category
