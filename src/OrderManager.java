@@ -9,13 +9,13 @@ import java.util.Scanner;
 
 public class OrderManager {
 
-    // Liste statique pour stocker les commandes créées
+    // Static list to store created orders
     public static List<Order> orders = new ArrayList<>();
 
 
     /**
-     * Affiche le menu principal pour gérer les commandes.
-     * L'utilisateur peut créer une commande, afficher les commandes existantes ou quitter.
+     * Displays the main menu to manage commands.
+     * User can create an order, view existing orders or exit.
      */
     public static void orderMenu() {
         Runtime.getRuntime().addShutdownHook(new Thread(OrderManager::saveOrdersToJsonFile));
@@ -78,8 +78,8 @@ public class OrderManager {
     }
 
     /**
-     * Crée une nouvelle commande en demandant à l'utilisateur
-     * si la commande est urgente ou standard, puis ajoute des produits.
+     * Creates a new order by asking the user
+     * if the order is urgent or standard, then add products.
      */
     private static void createOrder(Scanner scanner) {
         System.out.print("La commande est-elle urgente ? (oui/non) : ");
@@ -108,8 +108,8 @@ public class OrderManager {
             scanner.nextLine();
 
             /**
-             * Vérifie si le produit existe dans la liste et si la quantité est disponible.
-             * Si oui, l'ajoute à la commande et met à jour le stock.
+             * Checks if the product exists in the list and if the quantity is available.
+             * If yes, add it to the order and update the stock.
              */
             if (product.getStockQuantity() >= quantity) {
                 order.addProductToOrder(product, quantity);
@@ -125,8 +125,8 @@ public class OrderManager {
     }
 
     /**
-     * Affiche toutes les commandes enregistrées.
-     * Si aucune commande n'existe, affiche un message correspondant.
+     * Shows all saved commands.
+     * If no command exists, displays a corresponding message.
      */
     private static void displayOrders() {
         if (orders.isEmpty()) {
@@ -134,7 +134,7 @@ public class OrderManager {
         } else {
             for (int i = 0; i < orders.size(); i++) {
                 Order order = orders.get(i);
-                System.out.println("Commande #" + (i + 1) + (order instanceof UrgentOrder ? " (Urgente)" : " (Standard)"));
+                System.out.println("\nCommande #" + (i + 1) + (order instanceof UrgentOrder ? " (Urgente)" : " (Standard)"));
                 System.out.println("Date de commande : " + order.getFormattedDate());
                 for (Order.OrderItem item : order.orderItems) {
                     System.out.println("- Produit : " + item.getProduct().getName() + ", Quantité : " + item.getQuantity());

@@ -6,16 +6,16 @@ public class StandardOrder extends Order {
     }
 
     /**
-     * Commande standard avec une vérification de stock stricte (marge de 5 unités).
+     * Standard order with strict stock check (margin of 5 units).
      */
     @Override
     public boolean validateOrder() {
         for (OrderItem item : orderItems) {
             if (!item.getProduct().isStockSufficient(item.getQuantity() + 5)) {
 
-                return false;  // La commande est invalide si un produit est en rupture de stock
+                return false;  // The order is invalid if a product is out of stock
             }
         }
-        return true;  // La commande est valide si tous les produits ont suffisamment de stock
+        return true;  // The order is valid if all products have sufficient stock
     }
 }

@@ -17,16 +17,6 @@ public abstract class Order {
         this.orderDateTime = LocalDateTime.now(); // Initialise avec la date et l'heure actuelle
     }
 
-    public LocalDateTime getOrderDateTime() {
-        return orderDateTime;
-    }
-
-    // Format personnalisé pour afficher la date
-    public String getFormattedDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        return orderDateTime.format(formatter);
-    }
-
     // Méthode pour valider la commande
     public abstract boolean validateOrder();
 
@@ -57,5 +47,15 @@ public abstract class Order {
             return quantity;
         }
 
+    }
+
+    public LocalDateTime getOrderDateTime() {
+        return orderDateTime;
+    }
+
+    // Format personnalisé pour afficher la date
+    public String getFormattedDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        return orderDateTime.format(formatter);
     }
 }
