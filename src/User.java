@@ -35,11 +35,15 @@ public abstract class User {
         return this instanceof Admin;
     }
 
+    public boolean isClient() { return this instanceof Client;}
+
     @Override
     public String toString() {
         return "Id : " + this.identifiant + ", Rôle: " + this.role;
     }
 
+
+    // methode pour ajouter un role
     public void setRole(String newRole) {
         if (newRole.isEmpty()) {
             System.out.println("Le rôle ne peut pas être vide !");

@@ -72,10 +72,60 @@ public class MenuManager {
                             default:
                                 System.out.println("Invalid option. Please enter a number between 1 and 4.");
                         }
+                    } // sinon si c'est un client alors Affiche ce menu la
+                } else if (user.isClient()) {
+                    int nbmenu = -1;
+
+                    while (nbmenu != 1 && nbmenu != 4) {
+                        System.out.println("-------------------- Control Panel ---------------------");
+                        System.out.println(" 1. List Product");
+                        System.out.println(" 2. Search Product");
+                        System.out.println(" 3. Order Product");
+                        System.out.println(" 4. Shutdown");
+                        System.out.println("--------------------------------------------------------");
+
+                        System.out.println(" Choose an option (1, 2) : ");
+
+                        if (scanner.hasNextInt()) {
+                            nbmenu = scanner.nextInt();
+                            scanner.nextLine();
+                            System.out.println("--------------------------------------------------------");
+                        } else {
+                            System.out.println("--------------------------------------------------------");
+                            System.out.println("Invalid option. Please enter a number between 1 and 2.");
+                            scanner.nextLine();
+                            continue;
+                        }
+
+                        switch (nbmenu) {
+                            case 1:
+                                System.out.println("List of Products...");
+                                ListProduct.printAllProducts();
+                                break;
+                            case 2:
+                                System.out.println("Search Products...");
+                                Product product = SearchProduct.searchProductByName(scanner.nextLine());
+                                if (product == null) {
+                                    System.out.println("Product not found.");
+                                    break;
+                                }
+                                break;
+                            case 3:
+                                System.out.println("Commande Product...");
+                                OrderManager.orderMenu();
+                                return;
+                            case 4:
+                                System.out.println("Program Closure...");
+                                System.out.println("--------------------------------------------------------");
+                                System.exit(0);
+                            default:
+                                System.out.println("Invalid option. Please enter a number between 1 and 4.");
+                        }
                     }
+
                 } else {
                     System.out.println("Access granted to Employee Menu...");
-                    showEmployeeMenu();
+                   // showEmployeeMenu();
                 }
             } else {
                 System.out.println("--------------------------------------------------------");
@@ -84,6 +134,9 @@ public class MenuManager {
         }
     }
 
+    /**
+     * This function shows a menu made for Admin with a bunch of options for different interactions
+     */
     private void showAdminMenu() {
         while (true) {
             System.out.println("\n---------------------- Admin Menu ----------------------");

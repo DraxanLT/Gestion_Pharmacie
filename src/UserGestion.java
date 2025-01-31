@@ -10,11 +10,13 @@ public class UserGestion {
     public UserGestion() {
         this.usersList = new ArrayList<>();
 
+
     // List des Utilisateurs  Admin Employee
         usersList.add(new Admin("admin", "1234", "admin"));
+        usersList.add(new Client("client", "0000", "client"));
         usersList.add(new Employe("employee", "0000", "employee"));
         usersList.add(new Employe("employee", "0000", "SuperEmployee"));
-        usersList.add(new Employe("Client", "0000", "Client"));
+
     }
 
 
@@ -40,7 +42,7 @@ public class UserGestion {
         // boucle qui va verifier si ce qui est demander est bon
         // donner le nom sans espace tant que c'est pas bon il redemande
         do {
-            System.out.println("Renseignez le rôle (ex: Admin, User) :");
+            System.out.println("Renseignez le rôle (ex: Admin, Client, Employee) :");
             role = scanner.nextLine().trim();
         } while (role.isEmpty() || !role.matches("[a-zA-Z]+"));
 
