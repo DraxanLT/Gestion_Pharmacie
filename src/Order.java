@@ -4,42 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe abstraite représentant une commande.
- * Elle contient une liste d'articles commandés.
+ * Abstract class representing an order.
+ * It contains a list of ordered items.
  */
 public abstract class Order {
 
-    protected List<OrderItem> orderItems; // Liste des produits commandés avec leur quantité
+    protected List<OrderItem> orderItems; // List of products ordered with quantity
     protected LocalDateTime orderDateTime;
 
     public Order() {
         this.orderItems = new ArrayList<>();
-        this.orderDateTime = LocalDateTime.now(); // Initialise avec la date et l'heure actuelle
+        this.orderDateTime = LocalDateTime.now(); // Initializes with current date and time
     }
 
-    public LocalDateTime getOrderDateTime() {
-        return orderDateTime;
-    }
-
-    // Format personnalisé pour afficher la date
-    public String getFormattedDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        return orderDateTime.format(formatter);
-    }
-
-    // Méthode pour valider la commande
+    // Order validation method
     public abstract boolean validateOrder();
 
     /**
-     * Ajoute un produit avec une quantité spécifique à la commande.
-     * @param product Produit à ajouter.
-     * @param quantity Quantité du produit.
+     * Adds a product with a specific quantity to the order.
+     *@param product Product to add.
+     *@param quantity Product quantity.
      */
     public void addProductToOrder(Product product, int quantity) {
         orderItems.add(new OrderItem(product, quantity));
     }
 
-    // Classe interne représentant un article de commande
+    // Internal class representing an order item
     public static class OrderItem {
         private Product product;
         private int quantity;
@@ -57,5 +47,15 @@ public abstract class Order {
             return quantity;
         }
 
+    }
+
+    public LocalDateTime getOrderDateTime() {
+        return orderDateTime;
+    }
+
+    // Custom format for date display
+    public String getFormattedDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        return orderDateTime.format(formatter);
     }
 }

@@ -16,8 +16,8 @@ public class OrderManager {
 
 
     /**
-     * Affiche le menu principal pour gérer les commandes.
-     * L'utilisateur peut créer une commande, afficher les commandes existantes ou quitter.
+     * Displays the main menu to manage commands.
+     * User can create an order, view existing orders or exit.
      */
     public static void orderMenu() {
         Runtime.getRuntime().addShutdownHook(new Thread(OrderManager::saveOrdersToJsonFile));
@@ -27,11 +27,11 @@ public class OrderManager {
         OrderJson.loadOrdersFromJsonFile();
 
         while (!exit) {
-            System.out.println("\n--- Gestion des Commandes ---");
-            System.out.println("1. Créer une commande");
-            System.out.println("2. Afficher les commandes");
-            System.out.println("3. Quitter");
-            System.out.print("Choix : ");
+            System.out.println("\n--- Order Management ---");
+            System.out.println("1. Create an order");
+            System.out.println("2. Display orders");
+            System.out.println("3. Quit");
+            System.out.print("Choice : ");
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consomme le retour de ligne
@@ -40,10 +40,10 @@ public class OrderManager {
                 case 1 -> createOrder(scanner);
                 case 2 -> displayOrders();
                 case 3 -> {
-                    System.out.println("Fermeture du gestionnaire de commandes.");
+                    System.out.println("Close order manager.");
                     exit = true;
                 }
-                default -> System.out.println("Choix invalide.");
+                default -> System.out.println("Invalid choice.");
             }
         }
         scanner.close();
@@ -73,75 +73,75 @@ public class OrderManager {
         try (FileWriter file = new FileWriter("orders.json")) {
             file.write(ordersArray.toJSONString());
             file.flush();
-            System.out.println("Commandes enregistrées avec succès !");
+            System.out.println("Successful orders !");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Crée une nouvelle commande en demandant à l'utilisateur
-     * si la commande est urgente ou standard, puis ajoute des produits.
+     * Creates a new order by asking the user
+     * if the order is urgent or standard, then add products.
      */
     private static void createOrder(Scanner scanner) {
-        System.out.print("La commande est-elle urgente ? (oui/non) : ");
-        boolean isUrgent = scanner.nextLine().equalsIgnoreCase("oui");
+        System.out.print("Is the order urgent (yes/no) : ");
+        boolean isUrgent = scanner.nextLine().equalsIgnoreCase("yes");
 
         Order order = isUrgent ? new UrgentOrder() : new StandardOrder();
 
         while (true) {
-            System.out.println("\n--- Ajout de produits ---");
-            System.out.print("Nom du produit (ou 'valider' pour terminer) : ");
+            System.out.println("\n--- Add products ---");
+            System.out.print("Product name (or 'validate' to finish) : ");
             String productName = scanner.nextLine();
 
-            if (productName.equalsIgnoreCase("valider")) {
+            if (productName.equalsIgnoreCase("validate")) {
                 break;
             }
 
             Product product = SearchProduct.searchProductByName(productName);
             if (product == null) {
-                System.out.println("Produit introuvable.");
+                System.out.println("Product not found.");
                 continue;
             }
 
-            System.out.println("le prix du produit est de :" + product.getPrice());
-            System.out.print("Quantité souhaitée : ");
+            System.out.println("the price of the product is :" + product.getPrice());
+            System.out.print("Quantity required : ");
             int quantity = scanner.nextInt();
             scanner.nextLine();
 
             /**
-             * Vérifie si le produit existe dans la liste et si la quantité est disponible.
-             * Si oui, l'ajoute à la commande et met à jour le stock.
+             * Checks if the product exists in the list and if the quantity is available.
+             * If yes, add it to the order and update the stock.
              */
             if (product.getStockQuantity() >= quantity) {
                 order.addProductToOrder(product, quantity);
                 product.updateOrder(quantity);
                 csv.readCSVFile();
                 csv.addNewOrder(product, quantity);
-                System.out.println("Produit ajouté à la commande.");
+                System.out.println("Product added to order.");
             } else {
-                System.out.println("Stock insuffisant. Disponible : " + product.getStockQuantity());
+                System.out.println("Insufficient stock. Available in : " + product.getStockQuantity());
             }
         }
 
         orders.add(order);
-        System.out.println("Commande " + (isUrgent ? "urgente" : "standard") + " créée avec succès !");
+        System.out.println("Order " + (isUrgent ? "urgent" : "standard") + " created successfully !");
     }
 
     /**
-     * Affiche toutes les commandes enregistrées.
-     * Si aucune commande n'existe, affiche un message correspondant.
+     * Shows all saved commands.
+     * If no command exists, displays a corresponding message.
      */
     public static void displayOrders() {
         if (orders.isEmpty()) {
-            System.out.println("Aucune commande enregistrée.");
+            System.out.println("No orders recorded.");
         } else {
             for (int i = 0; i < orders.size(); i++) {
                 Order order = orders.get(i);
-                System.out.println("Commande #" + (i + 1) + (order instanceof UrgentOrder ? " (Urgente)" : " (Standard)"));
-                System.out.println("Date de commande : " + order.getFormattedDate());
+                System.out.println("\nOrder #" + (i + 1) + (order instanceof UrgentOrder ? " (Urgent)" : " (Standard)"));
+                System.out.println("Order date : " + order.getFormattedDate());
                 for (Order.OrderItem item : order.orderItems) {
-                    System.out.println("- Produit : " + item.getProduct().getName() + ", Quantité : " + item.getQuantity());
+                    System.out.println("- Product : " + item.getProduct().getName() + ", Quantity : " + item.getQuantity());
                 }
             }
         }

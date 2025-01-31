@@ -42,9 +42,9 @@ public class OrderJson {
                 }
                 OrderManager.orders.add(order);
             }
-            System.out.println("Commandes chargées depuis orders.json");
+            System.out.println("Commands loaded from orders.json");
         } catch (FileNotFoundException e) {
-            System.out.println("Fichier orders.json introuvable. Aucun chargement effectué.");
+            System.out.println("Orders.json not found. No loading performed.");
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
