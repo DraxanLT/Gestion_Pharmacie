@@ -1,13 +1,11 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class CSV {
     private String filename;
     private List<List<String>> statsDoc = new ArrayList<>();
     private int j = 1;
+    private Scanner sc = new Scanner(System.in);
 
     public CSV(String filename) {
         this.filename = filename;
@@ -141,6 +139,59 @@ public class CSV {
                 System.out.print(", ");
             }
             System.out.print('\n');
+        }
+    }
+
+    public void menuStats() {
+        System.out.println("-------------------- Employee Menu ---------------------");
+        System.out.println(" 1. Show the most buyed products");
+        System.out.println(" 2. Show the less buyed products");
+        System.out.println(" 3. Show the most ordered products");
+        System.out.println(" 4. Show the less orderedproducts");
+        System.out.println(" 5. Return to main menu");
+        System.out.println(" 6. Shutdown");
+        System.out.println("--------------------------------------------------------");
+
+        System.out.println("Choose an option : (1, 2, 3, 4)");
+        System.out.println("--------------------------------------------------------");
+
+        try {
+            int choix = sc.nextInt();
+            sc.nextLine();
+
+            switch (choix) {
+                case 1:
+                    mostBuy(this.getStatsDoc(), this.j, this);
+                    afficherStats();
+                    break;
+                case 2:
+                    LessBuy(this.getStatsDoc(), this.j, this);
+                    afficherStats();
+                    break;
+                case 3:
+                    mostAsk(this.getStatsDoc(), this.j, this);
+                    afficherStats();
+                    break;
+                case 4:
+                    LessAsk(this.getStatsDoc(), this.j, this);
+                    afficherStats();
+                    break;
+                case 5:
+                    UserGestion userService = new UserGestion();
+                    MenuManager menu = new MenuManager(userService);
+                    return;
+                case 6:
+                    System.out.println("Program Closure...");
+                    System.out.println("--------------------------------------------------------");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid option. Please enter a number between 1 and 6.");
+                    System.out.println("--------------------------------------------------------");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a number between 1 and 6.");
+            System.out.println("--------------------------------------------------------");
+            sc.nextLine();
         }
     }
 

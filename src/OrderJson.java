@@ -14,7 +14,7 @@ public class OrderJson {
 
 
     public static void loadOrdersFromJsonFile() {
-        try (FileReader reader = new FileReader("C:/Users/kiwia/Desktop/Coding/projet pharmacie/Gestion_Pharmacie/orders.json")) {
+        try (FileReader reader = new FileReader("C:/Users/eband/Documents/Pharmacie/Gestion_Pharmacie/orders.json")) {
             JSONParser jsonParser = new JSONParser();
             JSONArray ordersArray = (JSONArray) jsonParser.parse(reader);
 
@@ -40,7 +40,6 @@ public class OrderJson {
                         order.addProductToOrder(product, quantity.intValue());
                     }
                 }
-
                 OrderManager.orders.add(order);
             }
             System.out.println("Commandes chargées depuis orders.json");

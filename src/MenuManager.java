@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class MenuManager {
     private UserGestion userService;
     private Scanner scanner;
+    private static CSV csv = new CSV("statsDoc.csv");
 
 
     public MenuManager(UserGestion userService) {
@@ -148,11 +149,12 @@ public class MenuManager {
             System.out.println(" 5. Manage storage");
             System.out.println(" 6. Order products");
             System.out.println(" 7. List orders");
-            System.out.println(" 8. Logout");
-            System.out.println(" 9. Shutdown");
+            System.out.println(" 8. product statistics");
+            System.out.println(" 9. Logout");
+            System.out.println(" 10. Shutdown");
             System.out.println("--------------------------------------------------------");
 
-            System.out.println("Choose an option : (1, 2, 3, 4, 5, 6, 7, 8, 9)");
+            System.out.println("Choose an option : (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)");
             System.out.println("--------------------------------------------------------");
 
             try {
@@ -164,8 +166,17 @@ public class MenuManager {
                         ListProduct.printAllProducts();
                         break;
                     case 2:
-                        // Search
-                        break;
+                        System.out.println("Searching for a product");
+                        Product product = SearchProduct.searchProductByName(scanner.nextLine());
+                        if (product == null) {
+                            System.out.println("Product not found.");
+                            break;
+                        }
+                        else {
+                            System.out.println(product.getName()+ " is found, there are : "+product.getStockQuantity());
+                            System.out.println("Price : " + product.getPrice());
+                            break;
+                        }
                     case 3:
                         ProductManager.NewProduct("stocks_pharma.json");
                         break;
@@ -173,28 +184,33 @@ public class MenuManager {
                         ProductManager.DeleteProduct("stocks_pharma.json");
                         break;
                     case 5:
-                        // Stock
+                        Pharmacy pharmacy = ListProduct.createNewPharmacy();
+                        pharmacy.showlowstock();
                         break;
                     case 6:
                         OrderManager.orderMenu();
                         break;
                     case 7:
-                        // Orders history
+                        OrderManager.displayOrders();
                         break;
                     case 8:
+                        csv.readCSVFile();
+                        csv.menuStats();
+                        break;
+                    case 9:
                         System.out.println("Disconnecting...");
                         System.out.println("--------------------------------------------------------");
                         return;
-                    case 9:
+                    case 10:
                         System.out.println("Program Closure...");
                         System.out.println("--------------------------------------------------------");
                         System.exit(0);
                     default:
-                        System.out.println("Invalid option. Please enter a number between 1 and 9.");
+                        System.out.println("Invalid option. Please enter a number between 1 and 10.");
                         System.out.println("--------------------------------------------------------");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a number between 1 and 9.");
+                System.out.println("Invalid input. Please enter a number between 1 and 10.");
                 System.out.println("--------------------------------------------------------");
                 scanner.nextLine();
             }

@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class OrderManager {
 
     // Liste statique pour stocker les commandes créées
-    private static List<Order> orders = new ArrayList<>();
     private static CSV csv = new CSV("statsDoc.csv");
 
     public static List<Order> orders = new ArrayList<>();
@@ -133,7 +132,7 @@ public class OrderManager {
      * Affiche toutes les commandes enregistrées.
      * Si aucune commande n'existe, affiche un message correspondant.
      */
-    private static void displayOrders() {
+    public static void displayOrders() {
         if (orders.isEmpty()) {
             System.out.println("Aucune commande enregistrée.");
         } else {

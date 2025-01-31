@@ -31,5 +31,24 @@ public class ListProduct {
         }
     }
 
+    public static Pharmacy createNewPharmacy() {
+        JsonManager jsonManager = new JsonManager();
+        Root root = jsonManager.readJson("stocks_pharma.json");
 
-}
+            if (root != null) {
+                Pharmacy pharmacy = root.getPharmacy();
+                List<Product> allProducts = pharmacy.getListProducts();
+
+                if (allProducts.isEmpty()) {
+                    System.out.println("No products available.");
+                    return null;
+                }
+
+                return pharmacy;
+            } else {
+                System.out.println("Error loading products.");
+                return null;
+            }
+        }
+    }
+

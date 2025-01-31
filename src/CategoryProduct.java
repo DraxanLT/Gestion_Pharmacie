@@ -8,7 +8,7 @@ public class CategoryProduct implements Serializable {
     private List<Product> products;
 
 
-    public CategoryProduct(String category) {
+    public CategoryProduct(String category , String subCategory) {
         this.category = category;
         this.subCategory = subCategory;
         this.products = new ArrayList<>();

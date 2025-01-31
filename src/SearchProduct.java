@@ -13,7 +13,8 @@ public class SearchProduct  implements Serializable {
      */
     public static Product searchProductByName(String productName) {
 
-        List<Product> allProducts = Pharmacy.getListProducts();
+        Pharmacy pharmacy = ListProduct.createNewPharmacy();
+        List<Product> allProducts = pharmacy.getListProducts();
 
         // Trier les produits par nom (ignore la casse)
         allProducts.sort(Comparator.comparing(p -> p.getName().toLowerCase()));
