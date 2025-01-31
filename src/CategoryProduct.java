@@ -5,12 +5,13 @@ public class CategoryProduct implements Serializable {
 
     private String category;
     private String subCategory;
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products;
 
 
     public CategoryProduct(String category, String subCategory) {
         this.category = category;
         this.subCategory = subCategory;
+        this.products = new ArrayList<>();
     }
 
     public String getCategory() {

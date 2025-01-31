@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class UserGestion  implements Serializable{
+public class UserGestion {
     private List<User> usersList;
     Scanner scanner = new Scanner(System.in);
     public UserGestion() {

@@ -1,22 +1,19 @@
-import java.util.List;
+public class Product {
 
-public class Product implements Serializable {
+    private int id;
+    private String name;
+    private double price;
+    private int stockQuantity;
+    private String description;
+    private String categoryName;
 
-    protected int id;
-    protected String name;
-    protected double price;
-    protected int stockQuantity;
-    protected String description;
-    protected CategoryProduct category;
-
-
-    public Product(int id, String name, double price, int stockQuantity, String description, CategoryProduct category, CategoryProduct subCategory) {
+    public Product(int id, String name, double price, int stockQuantity, String description, String categoryName) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.stockQuantity = stockQuantity;
         this.description = description;
-        this.category = category;
+        this.categoryName = categoryName;
     }
 
     public int getId() {
@@ -88,7 +85,11 @@ public class Product implements Serializable {
          *
          * @param stockQuantity : the new product's stock quantity
          */
-        this.stockQuantity = stockQuantity;
+        if (stockQuantity < 0) {
+            this.stockQuantity = 0;
+        } else {
+            this.stockQuantity = stockQuantity;
+        }
     }
 
     public String getDescription() {
@@ -120,22 +121,22 @@ public class Product implements Serializable {
 
 
 
-    public CategoryProduct getCategory() {
+    public String getCategoryName() {
         /**
          * This function give the product's category
          *
          * @return the product's category
          */
-        return category;
+        return categoryName;
     }
 
-    public void setCategory(CategoryProduct category) {
+    public void setCategoryName(String category) {
         /**
          * This function put a new product's category
          *
          * @param category : the new product's category
          */
-        this.category = category;
+        this.categoryName = category;
     }
 
     public boolean isStockSufficient(int requestedQuantity) {
