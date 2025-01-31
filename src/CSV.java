@@ -19,11 +19,11 @@ public class CSV {
         this.statsDoc = statsDoc;
     }
 
-
+    /**
+     * This function add the data in the csv file to the csv object
+     */
     public void readCSVFile() {
-        /**
-         * This function add the data in the csv file to the csv object
-         */
+
         statsDoc.clear();
         File file = new File(filename);
 

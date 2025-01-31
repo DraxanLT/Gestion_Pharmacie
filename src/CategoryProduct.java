@@ -14,66 +14,73 @@ public class CategoryProduct implements Serializable {
         this.products = new ArrayList<>();
     }
 
+    /**
+     * This function give the category's name
+     *
+     * @return the category's name
+     */
     public String getCategory() {
-        /**
-         * This function give the category's name
-         *
-         * @return the category's name
-         */
+
         return category;
     }
 
+    /**
+     * This function put a new category's name
+     *
+     * @param category : the new category's name
+     */
     public void setCategory(String category) {
-        /**
-         * This function put a new category's name
-         *
-         * @param category : the new category's name
-         */
+
         this.category = category;
     }
 
+    /**
+     * This function give the sub category's name
+     *
+     * @return the sub category's name
+     */
     public String getSubCategory() {
-        /**
-         * This function give the sub category's name
-         *
-         * @return the sub category's name
-         */
+
         return subCategory;
     }
 
+    /**
+     * This function put a new sub category's name
+     *
+     * @param subCategory : the new sub category's name
+     */
     public void setSubCategory(String subCategory) {
-        /**
-         * This function put a new sub category's name
-         *
-         * @param subCategory : the new sub category's name
-         */
+
         this.subCategory = subCategory;
     }
 
+    /**
+     * This function give the list of product with this category
+     *
+     * @return the list of product with this category
+     */
     public List<Product> getProducts() {
-        /**
-         * This function give the list of product with this category
-         *
-         * @return the list of product with this category
-         */
+
         return products;
     }
 
+    /**
+     * This function put a new list of product with this category
+     *
+     * @param products : the new list of product with this category
+     */
     public void setProducts(List<Product> products) {
-        /**
-         * This function put a new list of product with this category
-         *
-         * @param products : the new list of product with this category
-         */
+
         this.products = products;
     }
 
+    /**
+     * This function add a product in the list of all the product
+     *
+     * @param product : the new product to add
+     */
     public void addProduct(Product product) {
-        /**
-         * This function add a product in the list of all the product
-         *
-         * @param product : the new product to add
-         */
+
         this.products.add(product);
     }
 }
